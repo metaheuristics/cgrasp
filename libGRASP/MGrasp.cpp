@@ -25,8 +25,8 @@ MGrasp::MGrasp(int n, double* l, double *u, Funcao *func, double hs,
     this->xBest      = new double[n];
     this->debug      = DEBUG_LEVEL1_;
     this->dts        = new Dts(n, l, u, func, hs, he);
-    this->gaps       = new double[7];
-    this->evals      = new int[7];
+    this->gaps       = new double[7];    // nao deletado no destrutor
+    this->evals      = new int[7];       // nao deletado no destrutor
     this->indexGap   = 0;
 
     evals[0] = 100;
@@ -75,7 +75,6 @@ bool MGrasp::stopCriteria()
     if (contIter > MAX_ITERACOES) {
         return true;
     }
-
 
     return false;
 }

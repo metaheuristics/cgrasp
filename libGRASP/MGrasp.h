@@ -49,9 +49,9 @@ class MGrasp{
 
     double *getXBest();
     double *getGaps();
-    bool stopCriteria();
-    int randSelectElement(std::list<int> rcl);
-    void unifRandom(double *xAux);
+    bool   stopCriteria();
+    int    randSelectElement(std::list<int> rcl);
+    void   unifRandom(double *xAux);
     double linearSearch(double *x, int i, double *gI, double h);
     double goldenSearch(double *x, int i, double *gI, double h);
 
