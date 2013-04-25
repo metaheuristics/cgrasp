@@ -1,0 +1,20 @@
+TUTORIAL SOBRE O CÓDIGO DO DC-GRASP:
+
+O DC-GRASP foi todo programado em C++ e é todo baseado em OO (Orientação a Objetos).
+Ele é organizado em algumas subclasses:
+
+./libDTS - onde está a classe Dts.cpp que implementa a busca local do DC-GRASP
+./libGRASP - onde estão as classes main.cpp (classe principal) e M-GRASP (código do DC-GRASP propriamente com construção, mas sem a busca local).
+./libBFGS - onde estão as classes do BFGS ()
+./libFuncao - onde estão as classes que implementam cada um das funções a serem resolvidas (Ex: Rosenbrock.cpp, Zakharov.cpp, etc.) 
+./libUtil - implementa algumas funções utéis como gerar número aleatório, calcular norma, etc.
+
+Atenção especial na libFunção. Todas as classes de função (Ex: Rosenbrock.cpp, Zakharov.cpp, etc.) devem herdar da classe Função.cpp e sobrescrever os seguintes métodos: 
+	setFnEvals(int c): configura o contador que representa o numero de avaliações da função objetivo.
+	getGap(): calcula o gap com relação ao ótimo global
+	isNearOptimum(): define se o ótimo foi atingido ou não;				
+	calc(double *x): calcula o valor da função para um ponto x;
+	calcGrad(ap::real_1d_array &x, ap::real_1d_array &g): calcula o gradiente g da função para um ponto x.
+
+
+

@@ -1,0 +1,45 @@
+TUTORIAL COMO RODAR O DC-GRASP:
+
+- Para compilar o programa, digite o comando: 
+	make
+
+- Para executar o programa, digite a seguinte linha de comando:
+	./CGrasp FN N MAX_EVALS RUNS TYPE M
+ onde:
+ FN: nome da funcao (ex: ROSENBROCK, ZAKHAROV, etc). Lista completa abaixo.
+ N: dimensão do problema
+ MAX_EVALS: numero maximo de avaliacoes da funcao. Caso 0 rodar até convergir.
+ RUNS: numero de execucoes do CGrasp 
+ TYPE: Pode assumir 2 valores: PURO, HIBRIDO. Se o for PURO roda o DC-GRASP e se for HIBRIDO roda o DC-GRASP+
+ M: numero de correcoes da matriz do L-BFGS (M < N). Só é útil se estiver rodando o DC-GRASP+ (TYPE = HIBRIDO)
+
+- Lista completa dos nomes das funções:
+	ROSENBROCK
+	ZAKHAROV
+	SUMSQUARES
+	BRANIN
+	EASOM
+	GOLDSTEINPRICE
+	SHEKEL
+	HARTMANN
+	SHUBERT
+	BEALE
+	BOOTH
+	BOHACHEVSKY
+	HUMP
+	MATYAS
+	SCHWEFEL
+	COLVILLE
+	PERM
+	PERM0
+	POWERSUM
+	GRIEWANK
+	RASTRIGIN
+	TRID
+	POWELL
+	DIXONPRICE
+	ACKLEY
+	LEVY
+	SPHERE
+
+
