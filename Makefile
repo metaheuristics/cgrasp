@@ -1,5 +1,6 @@
 FLAGS = -lpthread -g
-LIBS=-Wall -I libGRASP -I libDTS -I libFuncao -I libUtil -I libBFGS -I /usr/local/include -I sprng/include -I .
+#LIBS=-Wall -I libGRASP -I libDTS -I libFuncao -I libUtil -I libBFGS -I /usr/local/include -I sprng/include -I .
+LIBS=-Wall -I libGRASP -I libDTS -I libFuncao -I libUtil -I libBFGS -I /usr/local/include -I .
 CC=g++
 
 libGRASPObjs = \
@@ -39,7 +40,7 @@ Powell.o \
 DixonPrice.o \
 Ackley.o \
 Levy.o \
-Sphere.o 
+Sphere.o
 #CECShiftedSphere.o \
 #CECShiftedSchwefel.o \
 #CECShiftedSchwefelNoise.o \
@@ -52,7 +53,7 @@ lbfgs.o \
 ap.o
 
 libUtilObjs = \
-Util.o 
+Util.o
 
 libGRASPObjsPre = $(addprefix libGRASP/,$(libGRASPObjs) )
 libDTSObjsPre = $(addprefix libDTS/,$(libDTSObjs) )
@@ -60,25 +61,23 @@ libFuncaoObjsPre = $(addprefix libFuncao/,$(libFuncaoObjs) )
 libBFGSObjsPre  = $(addprefix libBFGS/, $(libBFGSObjs)  )
 libUtilObjsPre  = $(addprefix libUtil/, $(libUtilObjs)  )
 
-OBJECTS=$(libGRASPObjsPre) $(libDTSObjsPre) $(libFuncaoObjsPre) $(libBFGSObjsPre) $(libUtilObjsPre) 
+OBJECTS=$(libGRASPObjsPre) $(libDTSObjsPre) $(libFuncaoObjsPre) $(libBFGSObjsPre) $(libUtilObjsPre)
 
 all:  CGrasp
 
 #CGrasp: $(OBJECTS)
 #	$(CC) -g -o CGrasp $(OBJECTS) -L /usr/X11/lib -lm -L./sprng/lib -llcg $(LIBS) $(FLAGS)
+# CGrasp: $(OBJECTS)
+# 	$(CC) -g -o CGrasp $(OBJECTS) -L /usr/X11/lib -lm $(LIBS) $(FLAGS)
 CGrasp: $(OBJECTS)
-	$(CC) -g -o CGrasp $(OBJECTS) -L /usr/X11/lib -lm $(LIBS) $(FLAGS)
+	$(CC) -g -o CGrasp $(OBJECTS) -lm $(LIBS) $(FLAGS)
 
 .c.o: $<
-	$(CC) -g -c $< -o $@ $(LIBS) 
+	$(CC) -g -c $< -o $@ $(LIBS)
 
 .cpp.o: $<
 	$(CC) -g -c $< -o $@ $(LIBS)
 
 clean:
-	@find -iname "CGrasp" -exec rm {} \;
-	@find -iname "*.o" -exec rm {} \;
-	@find -iname "*.so" -exec rm {} \;
-	@find -iname "*~" -exec rm {} \;
-	@find -iname "*.swp" -exec rm {} \;
-
+	rm -f CGrasp
+	rm -f `find . -iname *.o`
