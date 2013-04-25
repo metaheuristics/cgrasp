@@ -19,56 +19,55 @@
 
 
 class MGrasp{
-	
-	private:
-		int n;
-		double *l, *u;
-		double hs, he;
-		double plo;
 
-		Funcao *func;
+ private:
+    int n;
+    double *l, *u;
+    double hs, he;
+    double plo;
 
-		int contIter;
-		double fBest;
-		double *xBest;
+    Funcao *func;
 
-		MTRand *mtRand;
-		int debug;
+    int contIter;
+    double fBest;
+    double *xBest;
 
-		Dts *dts;
+    MTRand *mtRand;
+    int debug;
 
-		int *evals;		
-		double *gaps;
-		int indexGap;
+    Dts *dts;
 
-	protected:
-		
-		
-	public:
-		static const int MAX_ITERACOES = 20;
-		static const double GOLDEN_RATIO = 1.61803399;
-		
-		double *getXBest();
-		double *getGaps();
-		bool stopCriteria();
-		int randSelectElement(std::list<int> rcl);
-		void unifRandom(double *xAux);
-		double linearSearch(double *x, int i, double *gI, double h);
-		double goldenSearch(double *x, int i, double *gI, double h);
-				
-		void perturbe(double *x, double h);
+    int *evals;
+    double *gaps;
+    int indexGap;
 
-		void randSelectElementBh(double *x, double *xBestAux, double h);
-		bool constructGreedyRandom(double *x, double h);
-		//bool localImprovement(double *x, double h);
-		bool localImprovementTS(double *x, double *fXAux, double h);		
-		bool localImprovement(double *x, double *fX, double h);
+ protected:
 
-		bool verifyGap(double fX, int maxEvals);
-		bool start(bool hibrid, int m, int maxEvals);
+ public:
+    static const int MAX_ITERACOES = 20;
+    static const double GOLDEN_RATIO = 1.61803399;
 
-		MGrasp(int n, double* l, double *u, Funcao *f, double hs, double he, double plo);
-		virtual ~MGrasp();
+    double *getXBest();
+    double *getGaps();
+    bool stopCriteria();
+    int randSelectElement(std::list<int> rcl);
+    void unifRandom(double *xAux);
+    double linearSearch(double *x, int i, double *gI, double h);
+    double goldenSearch(double *x, int i, double *gI, double h);
+
+    void perturbe(double *x, double h);
+
+    void randSelectElementBh(double *x, double *xBestAux, double h);
+    bool constructGreedyRandom(double *x, double h);
+    //bool localImprovement(double *x, double h);
+    bool localImprovementTS(double *x, double *fXAux, double h);
+    bool localImprovement(double *x, double *fX, double h);
+
+    bool verifyGap(double fX, int maxEvals);
+    bool start(bool hibrid, int m, int maxEvals);
+
+    MGrasp(int n, double* l, double *u, Funcao *f, double hs, double he, double plo);
+    virtual ~MGrasp();
 };
 
 #endif /*MGRASP_H_*/
