@@ -37,8 +37,8 @@ class MGrasp{
 
     Dts *dts;
 
-    int *evals;
-    double *gaps;
+    int    evals[7];
+    double gaps[7];
     int indexGap;
 
  protected:

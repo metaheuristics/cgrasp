@@ -25,8 +25,6 @@ MGrasp::MGrasp(int n, double* l, double *u, Funcao *func, double hs,
     this->xBest      = new double[n];
     this->debug      = DEBUG_LEVEL1_;
     this->dts        = new Dts(n, l, u, func, hs, he);
-    this->gaps       = new double[7];    // nao deletado no destrutor
-    this->evals      = new int[7];       // nao deletado no destrutor
     this->indexGap   = 0;
 
     evals[0] = 100;
@@ -36,15 +34,22 @@ MGrasp::MGrasp(int n, double* l, double *u, Funcao *func, double hs,
     evals[4] = 10000;
     evals[5] = 20000;
     evals[6] = 50000;
-    for (int i = 0; i < 7; i++){
+    for (int i = 0; i < 7; i++) {
         gaps[i] = 0.0;
     }
 }
 
 MGrasp::~MGrasp()
 {
-    delete dts;
-    delete []xBest;
+    if (dts != NULL) {
+        delete dts;
+        dts = NULL;
+    }
+
+    if (xBest != NULL) {
+        delete []xBest;
+        xBest = NULL;
+    }
 }
 
 double *MGrasp::getXBest()
