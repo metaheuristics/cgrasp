@@ -496,8 +496,8 @@ bool MGrasp::start(bool hibrid, int m, int maxEvals)
             }
 
 
-            if ((!imprC) && (!imprL)){
-                if (hibrid){
+            if ((!imprC) && (!imprL)) {
+                if (hibrid) {
                     if (debug >=  DEBUG_LEVEL1_) {
                         printf("\tVai chamar BFGS = %lf \n", fBest);
                         printf("\tChamando L-BFGS... \n");

@@ -66,6 +66,8 @@ class MGrasp{
     bool verifyGap(double fX, int maxEvals);
     bool start(bool hibrid, int m, int maxEvals);
 
+    void setDebugLevel(int dbglvl)           {   this->debug = dbglvl;   }
+
     MGrasp(int n, double* l, double *u, Funcao *f, double hs, double he, double plo);
     virtual ~MGrasp();
 };

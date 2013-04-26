@@ -471,6 +471,7 @@ MGrasp *initMGrasp(int iFuncNum, int n, Funcao **func) {
     }
 
     mgrasp = new MGrasp(n, l, u, *func, hs, he, plo);
+    mgrasp->setDebugLevel(0);
     return mgrasp;
 }
 
@@ -488,39 +489,39 @@ void usage(){
 
 int getFuncNumb(char *funcName){
 
-    if (!strcmp(funcName, "ROSENBROCK")) 		return Funcao::ROSENBROCK;
-    if (!strcmp(funcName, "ZAKHAROV")) 			return Funcao::ZAKHAROV;
-    if (!strcmp(funcName, "SUMSQUARES")) 		return Funcao::SUMSQUARES;
-    if (!strcmp(funcName, "BRANIN")) 			return Funcao::BRANIN;
-    if (!strcmp(funcName, "EASOM")) 			return Funcao::EASOM;
-    if (!strcmp(funcName, "GOLDSTEINPRICE"))	return Funcao::GOLDSTEINPRICE;
-    if (!strcmp(funcName, "SHEKEL")) 			return Funcao::SHEKEL;
-    if (!strcmp(funcName, "HARTMANN")) 			return Funcao::HARTMANN;
-    if (!strcmp(funcName, "SHUBERT")) 			return Funcao::SHUBERT;
-    if (!strcmp(funcName, "BEALE"))				return Funcao::BEALE;
-    if (!strcmp(funcName, "BOOTH"))				return Funcao::BOOTH;
-    if (!strcmp(funcName, "BOHACHEVSKY"))		return Funcao::BOHACHEVSKY;
-    if (!strcmp(funcName, "HUMP"))				return Funcao::HUMP;
-    if (!strcmp(funcName, "MATYAS"))			return Funcao::MATYAS;
-    if (!strcmp(funcName, "SCHWEFEL"))			return Funcao::SCHWEFEL;
-    if (!strcmp(funcName, "COLVILLE"))			return Funcao::COLVILLE;
-    if (!strcmp(funcName, "PERM"))				return Funcao::PERM;
-    if (!strcmp(funcName, "PERM0"))				return Funcao::PERM0;
-    if (!strcmp(funcName, "POWERSUM"))			return Funcao::POWERSUM;
-    if (!strcmp(funcName, "GRIEWANK"))			return Funcao::GRIEWANK;
-    if (!strcmp(funcName, "RASTRIGIN"))			return Funcao::RASTRIGIN;
-    if (!strcmp(funcName, "TRID"))				return Funcao::TRID;
-    if (!strcmp(funcName, "POWELL"))			return Funcao::POWELL;
-    if (!strcmp(funcName, "DIXONPRICE"))		return Funcao::DIXONPRICE;
-    if (!strcmp(funcName, "ACKLEY"))			return Funcao::ACKLEY;
-    if (!strcmp(funcName, "LEVY"))				return Funcao::LEVY;
-    if (!strcmp(funcName, "SPHERE"))			return Funcao::SPHERE;
-    if (!strcmp(funcName, "SHIFTEDSPHERE"))		return Funcao::SHIFTEDSPHERE;
-    if (!strcmp(funcName, "SHIFTEDSCHWEFEL"))	return Funcao::SHIFTEDSCHWEFEL;
-    if (!strcmp(funcName, "SHIFTEDSCHWEFELN"))	return Funcao::SHIFTEDSCHWEFELN;
-    if (!strcmp(funcName, "ROTATEDRASTRIGIN"))	return Funcao::ROTATEDRASTRIGIN;
-    if (!strcmp(funcName, "ROTATEDWEIERSTRASS"))return Funcao::ROTATEDWEIERSTRASS;
-    if (!strcmp(funcName, "ROTATEDEXPSCAFFERS"))return Funcao::ROTATEDEXPSCAFFERS;
+    if (!strcmp(funcName, "ROSENBROCK"))         return Funcao::ROSENBROCK;
+    if (!strcmp(funcName, "ZAKHAROV"))           return Funcao::ZAKHAROV;
+    if (!strcmp(funcName, "SUMSQUARES"))         return Funcao::SUMSQUARES;
+    if (!strcmp(funcName, "BRANIN"))             return Funcao::BRANIN;
+    if (!strcmp(funcName, "EASOM"))              return Funcao::EASOM;
+    if (!strcmp(funcName, "GOLDSTEINPRICE"))     return Funcao::GOLDSTEINPRICE;
+    if (!strcmp(funcName, "SHEKEL"))             return Funcao::SHEKEL;
+    if (!strcmp(funcName, "HARTMANN"))           return Funcao::HARTMANN;
+    if (!strcmp(funcName, "SHUBERT"))            return Funcao::SHUBERT;
+    if (!strcmp(funcName, "BEALE"))              return Funcao::BEALE;
+    if (!strcmp(funcName, "BOOTH"))              return Funcao::BOOTH;
+    if (!strcmp(funcName, "BOHACHEVSKY"))        return Funcao::BOHACHEVSKY;
+    if (!strcmp(funcName, "HUMP"))               return Funcao::HUMP;
+    if (!strcmp(funcName, "MATYAS"))             return Funcao::MATYAS;
+    if (!strcmp(funcName, "SCHWEFEL"))           return Funcao::SCHWEFEL;
+    if (!strcmp(funcName, "COLVILLE"))           return Funcao::COLVILLE;
+    if (!strcmp(funcName, "PERM"))               return Funcao::PERM;
+    if (!strcmp(funcName, "PERM0"))              return Funcao::PERM0;
+    if (!strcmp(funcName, "POWERSUM"))           return Funcao::POWERSUM;
+    if (!strcmp(funcName, "GRIEWANK"))           return Funcao::GRIEWANK;
+    if (!strcmp(funcName, "RASTRIGIN"))          return Funcao::RASTRIGIN;
+    if (!strcmp(funcName, "TRID"))               return Funcao::TRID;
+    if (!strcmp(funcName, "POWELL"))             return Funcao::POWELL;
+    if (!strcmp(funcName, "DIXONPRICE"))         return Funcao::DIXONPRICE;
+    if (!strcmp(funcName, "ACKLEY"))             return Funcao::ACKLEY;
+    if (!strcmp(funcName, "LEVY"))               return Funcao::LEVY;
+    if (!strcmp(funcName, "SPHERE"))             return Funcao::SPHERE;
+    if (!strcmp(funcName, "SHIFTEDSPHERE"))      return Funcao::SHIFTEDSPHERE;
+    if (!strcmp(funcName, "SHIFTEDSCHWEFEL"))    return Funcao::SHIFTEDSCHWEFEL;
+    if (!strcmp(funcName, "SHIFTEDSCHWEFELN"))   return Funcao::SHIFTEDSCHWEFELN;
+    if (!strcmp(funcName, "ROTATEDRASTRIGIN"))   return Funcao::ROTATEDRASTRIGIN;
+    if (!strcmp(funcName, "ROTATEDWEIERSTRASS")) return Funcao::ROTATEDWEIERSTRASS;
+    if (!strcmp(funcName, "ROTATEDEXPSCAFFERS")) return Funcao::ROTATEDEXPSCAFFERS;
 
     return -1;
 }
