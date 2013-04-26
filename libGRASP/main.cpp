@@ -535,48 +535,57 @@ int getType(char *typeName){
     return -1;
 }
 
-void saveGaps(double *mediaGaps, int numIter){
-    FILE *arqlog100 = fopen("resultados/gap100.txt", "a+");
-    FILE *arqlog500 = fopen("resultados/gap500.txt", "a+");
-    FILE *arqlog1000 = fopen("resultados/gap1000.txt", "a+");
-    FILE *arqlog5000 = fopen("resultados/gap5000.txt", "a+");
-    FILE *arqlog10000 = fopen("resultados/gap10000.txt", "a+");
-    FILE *arqlog20000 = fopen("resultados/gap20000.txt", "a+");
-    FILE *arqlog50000 = fopen("resultados/gap50000.txt", "a+");
+inline void closeIfNotNull(FILE *f)
+{
+    if (f != NULL)
+        fclose(f);
+}
 
-    /*for (int j = 0; j < 7; j++){
-      printf("Media do GAP = %lf \n", mediaGaps[j]/(double)numIter);
-      fprintf(arqlog, "%lf (%s-%d) - num_aval = %d \n", mediaGaps[j]/(double)numIter, iFuncName, n, j);
-      }*/
+void saveGaps(double *mediaGaps, int numIter)
+{
+    FILE *arqlog100 = fopen("gap100.txt", "a+");
+    FILE *arqlog500 = fopen("gap500.txt", "a+");
+    FILE *arqlog1000 = fopen("gap1000.txt", "a+");
+    FILE *arqlog5000 = fopen("gap5000.txt", "a+");
+    FILE *arqlog10000 = fopen("gap10000.txt", "a+");
+    FILE *arqlog20000 = fopen("gap20000.txt", "a+");
+    FILE *arqlog50000 = fopen("gap50000.txt", "a+");
+
     printf("Media do GAP 100 = %lf \n", mediaGaps[0]/(double)numIter);
-    fprintf(arqlog100, "%lf\n", mediaGaps[0]/(double)numIter);
+    if (arqlog100 != NULL)
+        fprintf(arqlog100, "%lf\n", mediaGaps[0]/(double)numIter);
 
     printf("Media do GAP 500 = %lf \n", mediaGaps[1]/(double)numIter);
-    fprintf(arqlog500, "%lf\n", mediaGaps[1]/(double)numIter);
+    if (arqlog500 != NULL)
+        fprintf(arqlog500, "%lf\n", mediaGaps[1]/(double)numIter);
 
     printf("Media do GAP 1000 = %lf \n", mediaGaps[2]/(double)numIter);
-    fprintf(arqlog1000, "%lf\n", mediaGaps[2]/(double)numIter);
+    if (arqlog1000 != NULL)
+        fprintf(arqlog1000, "%lf\n", mediaGaps[2]/(double)numIter);
 
     printf("Media do GAP 5000 = %lf \n", mediaGaps[3]/(double)numIter);
-    fprintf(arqlog5000, "%lf\n", mediaGaps[3]/(double)numIter);
+    if (arqlog5000 != NULL)
+        fprintf(arqlog5000, "%lf\n", mediaGaps[3]/(double)numIter);
 
     printf("Media do GAP 10000 = %lf \n", mediaGaps[4]/(double)numIter);
-    fprintf(arqlog10000, "%lf\n", mediaGaps[4]/(double)numIter);
+    if (arqlog10000 != NULL)
+        fprintf(arqlog10000, "%lf\n", mediaGaps[4]/(double)numIter);
 
     printf("Media do GAP 20000 = %lf \n", mediaGaps[5]/(double)numIter);
-    fprintf(arqlog20000, "%lf\n", mediaGaps[5]/(double)numIter);
+    if (arqlog20000 != NULL)
+        fprintf(arqlog20000, "%lf\n", mediaGaps[5]/(double)numIter);
 
     printf("Media do GAP 50000 = %lf \n", mediaGaps[6]/(double)numIter);
-    fprintf(arqlog50000, "%lf\n", mediaGaps[6]/(double)numIter);
+    if (arqlog50000 != NULL)
+        fprintf(arqlog50000, "%lf\n", mediaGaps[6]/(double)numIter);
 
-
-    fclose(arqlog100);
-    fclose(arqlog500);
-    fclose(arqlog1000);
-    fclose(arqlog5000);
-    fclose(arqlog10000);
-    fclose(arqlog20000);
-    fclose(arqlog50000);
+    closeIfNotNull(arqlog100);
+    closeIfNotNull(arqlog500);
+    closeIfNotNull(arqlog1000);
+    closeIfNotNull(arqlog5000);
+    closeIfNotNull(arqlog10000);
+    closeIfNotNull(arqlog20000);
+    closeIfNotNull(arqlog50000);
 }
 
 
