@@ -13,7 +13,7 @@ MGrasp::MGrasp(int n, double* l, double *u, Funcao *func, double hs,
                double he, double plo)
 {
     this->n = n;
-    this->l = l;
+    this->l = l;     // quem controla os ponteiros l e u?
     this->u = u;
     this->func = func;
     this->hs = hs;
@@ -41,6 +41,16 @@ MGrasp::MGrasp(int n, double* l, double *u, Funcao *func, double hs,
 
 MGrasp::~MGrasp()
 {
+    if (l != NULL) {
+        delete[] l;
+        l = NULL;
+    }
+
+    if (u != NULL) {
+        delete[] u;
+        u = NULL;
+    }
+
     if (dts != NULL) {
         delete dts;
         dts = NULL;
@@ -435,6 +445,7 @@ bool MGrasp::start(bool hibrid, int m, int maxEvals)
     }
 
     fBest = std::numeric_limits<double>::max();
+    fXAnt = fBest;
     while(!stopCriteria()) {
         unifRandom(x);
         h = hs;

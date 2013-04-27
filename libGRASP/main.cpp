@@ -610,7 +610,8 @@ int main(int argc, char **argv){
     LBFGS *lbfgs;
     Funcao *func;
 
-    double *gaps, *mediaGaps;
+    double *gaps;
+    double mediaGaps[7];
 
     if (argc < 7) {
         usage();
@@ -645,7 +646,6 @@ int main(int argc, char **argv){
         return 1;
     }
 
-    mediaGaps = new double[7];
     for (int i = 0; i < 7; i++) {
         mediaGaps[i] = 0.0;
     }
