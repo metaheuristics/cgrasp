@@ -468,7 +468,10 @@ bool MGrasp::start(bool hibrid, int m, int maxEvals)
             }
 
             fX = func->calc(x);
-            if (verifyGap(fX, maxEvals)) return false;
+            if (verifyGap(fX, maxEvals)) {
+                delete[] x;
+                return false;
+            }
 
             // Incluido apenas para teste
             if (fX == fXAnt) {
@@ -485,7 +488,10 @@ bool MGrasp::start(bool hibrid, int m, int maxEvals)
                 printf(" = %lf (%d)\n", func->calc(x), func->getFnEvals());
             }
 
-            if (verifyGap(fX, maxEvals)) return false;
+            if (verifyGap(fX, maxEvals)) {
+                delete[] x;
+                return false;
+            }
 
             if (debug ==  DEBUG_LEVEL2_) {
                 printf("ImprC = %d - ImprL = %d...\n\n\n", imprC, imprL);
@@ -530,7 +536,10 @@ bool MGrasp::start(bool hibrid, int m, int maxEvals)
 
                     fX = func->calc(x);
                     printf("\tFx = %lf (%d)\n\n", fX);
-                    if (verifyGap(fX, maxEvals)) return false;
+                    if (verifyGap(fX, maxEvals)) {
+                        delete[] x;
+                        return false;
+                    }
 
                     double *grad = new double[n];
                     ap::real_1d_array g;
@@ -562,6 +571,6 @@ bool MGrasp::start(bool hibrid, int m, int maxEvals)
     if (lbfgs != NULL)
         delete lbfgs;
 
-    delete []x;
+    delete[] x;
     return false;
 }
