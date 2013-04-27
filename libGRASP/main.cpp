@@ -54,14 +54,16 @@
 #define HIBRIDO 1
 #define BFGS    2
 
-int64_t getMilisegundos() {
+int64_t getMilisegundos()
+{
     struct timeval tempo;
     gettimeofday(&tempo, NULL);
     return (int64_t) tempo.tv_sec * 1000 + tempo.tv_usec / 1000;
  }
 
 
-MGrasp *initMGrasp(int iFuncNum, int n, Funcao **func) {
+MGrasp *initMGrasp(int iFuncNum, int n, Funcao **func)
+{
     int m;
     double *u, *l;
     double hs, he, plo;
@@ -91,7 +93,7 @@ MGrasp *initMGrasp(int iFuncNum, int n, Funcao **func) {
         //hs = 2.0;
         if (n <= 5)
             he = 0.5;
-        else if (n >=20){
+        else if (n >=20) {
             hs = 5.0;
             //hs = 5.0;
             he = 0.05;
@@ -100,7 +102,7 @@ MGrasp *initMGrasp(int iFuncNum, int n, Funcao **func) {
             he = 0.005;
         }
 
-        for (int i =0; i < n; i++){
+        for (int i =0; i < n; i++) {
             l[i] = -5.0;
             u[i] = 10.0;
         }
@@ -131,7 +133,7 @@ MGrasp *initMGrasp(int iFuncNum, int n, Funcao **func) {
         hs = 1.0;
         he = 1.0;
         //he = 0.05;
-        for (int i =0; i < n; i++){
+        for (int i =0; i < n; i++) {
             l[i] = -2.0;
             u[i] = 2.0;
         }
@@ -142,7 +144,7 @@ MGrasp *initMGrasp(int iFuncNum, int n, Funcao **func) {
         hs = 1.0;
         he = 0.1;
 
-        for (int i =0; i < n; i++){
+        for (int i =0; i < n; i++) {
             l[i] = -100.0;
             u[i] = 100.0;
         }
@@ -162,7 +164,7 @@ MGrasp *initMGrasp(int iFuncNum, int n, Funcao **func) {
         he = 0.5;
         //hs = 0.1;
         //he = 0.05;
-        for (int i =0; i < n; i++){
+        for (int i = 0; i < n; i++) {
             l[i] = 0.0;
             u[i] = 10.0;
         }
@@ -173,17 +175,17 @@ MGrasp *initMGrasp(int iFuncNum, int n, Funcao **func) {
         //hs = 0.1;
         //he = 0.001;
 
-        if (n == 3){
+        if (n == 3) {
             hs = 0.5;
             he = 0.001;
         }
-        else if (n == 6){
+        else if (n == 6) {
             //he = 0.05;
             hs = 0.1;
             he = 0.01;
         }
 
-        for (int i =0; i < n; i++){
+        for (int i =0; i < n; i++) {
             l[i] = 0.0;
             u[i] = 1.0;
         }
@@ -195,7 +197,7 @@ MGrasp *initMGrasp(int iFuncNum, int n, Funcao **func) {
         he = 0.01;
         //hs = 0.1;
         //he = 0.05;
-        for (int i =0; i < n; i++){
+        for (int i =0; i < n; i++) {
             l[i] = -10.0;
             u[i] = 10.0;
         }
@@ -205,7 +207,7 @@ MGrasp *initMGrasp(int iFuncNum, int n, Funcao **func) {
     case Funcao::BEALE:
         hs = 1.0;
         he = 0.5;
-        for (int i =0; i < n; i++){
+        for (int i =0; i < n; i++) {
             l[i] = -4.5;
             u[i] = 4.5;
         }
@@ -215,7 +217,7 @@ MGrasp *initMGrasp(int iFuncNum, int n, Funcao **func) {
     case Funcao::BOOTH:
         hs = 1.0;
         he = 0.5;
-        for (int i =0; i < n; i++){
+        for (int i =0; i < n; i++) {
             l[i] = -10.0;
             u[i] = 10.0;
         }
@@ -225,7 +227,7 @@ MGrasp *initMGrasp(int iFuncNum, int n, Funcao **func) {
     case Funcao::BOHACHEVSKY:
         hs = 1.0;
         he = 0.5;
-        for (int i =0; i < n; i++){
+        for (int i =0; i < n; i++) {
             l[i] = -50.0;
             u[i] = 100.0;
         }
@@ -235,7 +237,7 @@ MGrasp *initMGrasp(int iFuncNum, int n, Funcao **func) {
     case Funcao::HUMP:
         hs = 1.0;
         he = 0.01;
-        for (int i =0; i < n; i++){
+        for (int i =0; i < n; i++) {
             l[i] = -5.0;
             u[i] = 5.0;
         }
@@ -245,7 +247,7 @@ MGrasp *initMGrasp(int iFuncNum, int n, Funcao **func) {
     case Funcao::MATYAS:
         hs = 1.0;
         he = 0.1;
-        for (int i =0; i < n; i++){
+        for (int i =0; i < n; i++) {
             l[i] = -5.0;
             u[i] = 10.0;
         }
@@ -253,16 +255,16 @@ MGrasp *initMGrasp(int iFuncNum, int n, Funcao **func) {
         break;
 
     case Funcao::SCHWEFEL:
-        if (n == 2){
+        if (n == 2) {
             hs = 5.0;
             he = 0.25;
         }
-        else if (n==6){
+        else if (n==6) {
             hs = 50.0;
             he = 0.25;
         }
 
-        for (int i =0; i < n; i++){
+        for (int i =0; i < n; i++) {
             l[i] = -500.0;
             u[i] = 500.0;
         }
@@ -272,7 +274,7 @@ MGrasp *initMGrasp(int iFuncNum, int n, Funcao **func) {
     case Funcao::COLVILLE:
         hs = 1.0;
         he = 0.1;
-        for (int i =0; i < n; i++){
+        for (int i =0; i < n; i++) {
             l[i] = -10.0;
             u[i] = 10.0;
         }
@@ -284,7 +286,7 @@ MGrasp *initMGrasp(int iFuncNum, int n, Funcao **func) {
         //he = 0.01;
         hs = 0.1;
         he = 0.0125;
-        for (int i =0; i < n; i++){
+        for (int i =0; i < n; i++) {
             l[i] = (double) -n;
             u[i] = (double) n;
         }
@@ -296,7 +298,7 @@ MGrasp *initMGrasp(int iFuncNum, int n, Funcao **func) {
         he = 0.01;
         //hs = 0.1;
         //he = 0.0125;
-        for (int i =0; i < n; i++){
+        for (int i =0; i < n; i++) {
             l[i] = (double) -n;
             u[i] = (double) n;
         }
@@ -306,7 +308,7 @@ MGrasp *initMGrasp(int iFuncNum, int n, Funcao **func) {
     case Funcao::POWERSUM:
         hs = 1.0;
         he = 0.1;
-        for (int i =0; i < n; i++){
+        for (int i =0; i < n; i++) {
             l[i] = (double) 0.0;
             u[i] = (double) n;
         }
@@ -317,7 +319,7 @@ MGrasp *initMGrasp(int iFuncNum, int n, Funcao **func) {
     case Funcao::GRIEWANK:
         hs = 10.0;
         he = 0.25;
-        for (int i =0; i < n; i++){
+        for (int i =0; i < n; i++) {
             l[i] = -300.0;
             u[i] = 600.0;
         }
@@ -329,7 +331,7 @@ MGrasp *initMGrasp(int iFuncNum, int n, Funcao **func) {
         //he = 0.1;
         hs = 0.5;
         he = 0.1;
-        for (int i =0; i < n; i++){
+        for (int i =0; i < n; i++) {
             l[i] = -2.56;
             u[i] = 5.12;
         }
@@ -338,16 +340,16 @@ MGrasp *initMGrasp(int iFuncNum, int n, Funcao **func) {
 
 
     case Funcao::TRID:
-        if (n == 10){
+        if (n == 10) {
             hs = 5.0;
             he = 0.1;
         }
-        else{
+        else {
             hs = 1.0;
             he = 0.1;
         }
 
-        for (int i =0; i < n; i++){
+        for (int i =0; i < n; i++) {
             l[i] = (double) -n*n;
             u[i] = (double) n*n;
         }
@@ -358,7 +360,7 @@ MGrasp *initMGrasp(int iFuncNum, int n, Funcao **func) {
     case Funcao::POWELL:
         hs = 1.0;
         he = 0.1;
-        for (int i =0; i < n; i++){
+        for (int i =0; i < n; i++) {
             l[i] = -4.0;
             u[i] = 5.0;
         }
@@ -368,7 +370,7 @@ MGrasp *initMGrasp(int iFuncNum, int n, Funcao **func) {
     case Funcao::DIXONPRICE:
         hs = 5.0;
         he = 0.25;
-        for (int i =0; i < n; i++){
+        for (int i =0; i < n; i++) {
             l[i] = -10.0;
             u[i] = 10.0;
         }
@@ -378,7 +380,7 @@ MGrasp *initMGrasp(int iFuncNum, int n, Funcao **func) {
     case Funcao::ACKLEY:
         hs = 5.0;
         he = 0.05;
-        for (int i =0; i < n; i++){
+        for (int i =0; i < n; i++) {
             l[i] = -15.0;
             u[i] = 30.0;
         }
@@ -389,7 +391,7 @@ MGrasp *initMGrasp(int iFuncNum, int n, Funcao **func) {
     case Funcao::LEVY:
         hs = 1.0;
         he = 0.1;
-        for (int i =0; i < n; i++){
+        for (int i =0; i < n; i++) {
             l[i] = -10.0;
             u[i] = 10.0;
         }
@@ -399,7 +401,7 @@ MGrasp *initMGrasp(int iFuncNum, int n, Funcao **func) {
     case Funcao::SPHERE:
         hs = 2.0;
         he = 0.05;
-        for (int i =0; i < n; i++){
+        for (int i =0; i < n; i++) {
             l[i] = -2.56;
             u[i] = 5.12;
         }
@@ -526,11 +528,12 @@ int getFuncNumb(char *funcName){
     return -1;
 }
 
-int getType(char *typeName){
+int getType(char *typeName)
+{
 
-    if (!strcmp(typeName, "PURO")) 		return PURO;
-    if (!strcmp(typeName, "BFGS")) 		return BFGS;
-    if (!strcmp(typeName, "HIBRIDO")) 	return HIBRIDO;
+    if (!strcmp(typeName, "PURO"))      return PURO;
+    if (!strcmp(typeName, "BFGS"))      return BFGS;
+    if (!strcmp(typeName, "HIBRIDO"))   return HIBRIDO;
 
     return -1;
 }
@@ -590,7 +593,8 @@ void saveGaps(double *mediaGaps, int numIter)
 
 
 
-int main(int argc, char **argv){
+int main(int argc, char **argv)
+{
     char *iFuncName;
     int m, info;
     int maxEvals;
@@ -631,12 +635,12 @@ int main(int argc, char **argv){
     type        = getType(argv[5]);
     m           = atoi(argv[6]);
 
-    if(iFuncNumb == -1) {
+    if (iFuncNumb == -1) {
         printf("Função %s não existe... \n\n", iFuncName);
         return 1;
     }
 
-    if(type == -1) {
+    if (type == -1) {
         printf("Tipo %s não existe... \n\n", argv[4]);
         return 1;
     }
