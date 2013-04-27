@@ -13,7 +13,7 @@ MGrasp::MGrasp(int n, double* l, double *u, Funcao *func, double hs,
                double he, double plo)
 {
     this->n = n;
-    this->l = l;     // quem controla os ponteiros l e u?
+    this->l = l;     // esta classe controla os ponteiros l e u
     this->u = u;
     this->func = func;
     this->hs = hs;
@@ -433,7 +433,7 @@ bool MGrasp::start(bool hibrid, int m, int maxEvals)
     double epsg, epsf, epsx;
     ap::real_1d_array xBFGS;
     int info;
-    LBFGS *lbfgs;
+    LBFGS *lbfgs = NULL;
 
     double maxiters = 0.0;
     if (hibrid) {
@@ -446,7 +446,7 @@ bool MGrasp::start(bool hibrid, int m, int maxEvals)
 
     fBest = std::numeric_limits<double>::max();
     fXAnt = fBest;
-    while(!stopCriteria()) {
+    while (!stopCriteria()) {
         unifRandom(x);
         h = hs;
         if (debug ==  DEBUG_LEVEL1_) {
@@ -454,7 +454,7 @@ bool MGrasp::start(bool hibrid, int m, int maxEvals)
             printf(" = %lf \n\n", func->calc(x));
         }
 
-        while(h > he || Util::equals(h,he)) {
+        while (h > he || Util::equals(h,he)) {
             imprC = false;
             imprL = false;
             if (debug ==  DEBUG_LEVEL2_) {
@@ -558,6 +558,9 @@ bool MGrasp::start(bool hibrid, int m, int maxEvals)
             cont++;
         }
     }
+
+    if (lbfgs != NULL)
+        delete lbfgs;
 
     delete []x;
     return false;
