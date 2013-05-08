@@ -124,7 +124,6 @@ void MGrasp::unifRandom(double *xAux)
     // Para os n indices gera
     for (int i = 0; i < n; i++) {
         // Gera um numero de ponto flutuante entre 0 e 1
-        //r = dRand();
         r = Util::dRand();
         // Pega o numero aleatorio e coloca ele na faixa de valores da funcao
         xAux[i] = l[i] + (r * (u[i] - l[i]));
@@ -137,7 +136,8 @@ void MGrasp::unifRandom(double *xAux)
 // Numa busca linear, faz-se uma busca na direcao p(k) e quao distante eh aquela busca(tamanho do passo,
 // definido por a(k). Entao, o movimento gerado numa busca linear eh x(k+1) = x(k) + a(k)*p(k).
 // No caso do C-Grasp, a busca sera realizada na direcao de 'i' com tamanho de passo 'h';
-/* double MGrasp::linearSearch(double *x, int i, double *gI, double h){
+/* double MGrasp::linearSearch(double *x, int i, double *gI, double h)
+{
    bool melhorou = false;
 
    double *xAux = new double[n];
@@ -230,7 +230,7 @@ double MGrasp::linearSearch(double *x, int i, double *gI, double h)
             xAuxI = xAux[i];
         }
 
-        xAux[i]	+= h;
+        xAux[i] += h;
     }
 
     //printf("\n");
@@ -273,7 +273,7 @@ bool MGrasp::constructGreedyRandom(double *x, double h)
     g = new double[n];
 
     // Enquanto lista nao vazia
-    while(unfixed.size()){
+    while(unfixed.size()) {
         gMin = std::numeric_limits<double>::max();
         gMax = std::numeric_limits<double>::min();
 

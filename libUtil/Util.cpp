@@ -43,7 +43,7 @@ bool Util::feasible(double *x, double *l, double *u, int n)
 
 bool Util::equals(double x1, double x2)
 {
-    if (fabs(x1 - x2) > 0.000001) {
+    if (fabs(x1 - x2) > 0.000001) {   // FIX: tolerancia fixa
         return false;
     }
 

@@ -473,7 +473,7 @@ MGrasp *initMGrasp(int iFuncNum, int n, Funcao **func)
     }
 
     mgrasp = new MGrasp(n, l, u, *func, hs, he, plo);
-    mgrasp->setDebugLevel(0);
+    mgrasp->setDebugLevel(1);
     return mgrasp;
 }
 

@@ -64,8 +64,8 @@ double *Dts::goldenSearch(double *x, double *v, double *fXAux, double h, bool *i
         xD[i] = xA[i] + dir[i]*ratio1*h;
     }
 
-    valA  = func->calc(xA);
-    valB  = func->calc(xB);
+    valA = func->calc(xA);
+    valB = func->calc(xB);
     valC = func->calc(xC);
     valD = func->calc(xD);
     if (debug ==  DEBUG_LEVEL2_) {
