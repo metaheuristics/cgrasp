@@ -273,7 +273,7 @@ bool MGrasp::constructGreedyRandom(double *x, double h)
     g = new double[n];
 
     // Enquanto lista nao vazia
-    while(unfixed.size()) {
+    while(unfixed.size() > 0) {
         gMin = std::numeric_limits<double>::max();
         gMax = std::numeric_limits<double>::min();
 
@@ -293,7 +293,7 @@ bool MGrasp::constructGreedyRandom(double *x, double h)
         }
 
         rcl.clear();
-        threshold = gMin + alpha *(gMax - gMin);
+        threshold = gMin + alpha * (gMax - gMin);
 
         if (debug ==  DEBUG_LEVEL2_) {
             printf("gMin = %lf \n", gMin);

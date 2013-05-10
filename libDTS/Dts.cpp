@@ -123,7 +123,7 @@ double *Dts::goldenSearch(double *x, double *v, double *fXAux, double h, bool *i
             }
 
         }
-        else{
+        else {
             if (debug ==  DEBUG_LEVEL2_) {
                 printf("ValC > ValD \n");
             }

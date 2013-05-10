@@ -81,3 +81,4 @@ CGrasp: $(OBJECTS)
 clean:
 	rm -f CGrasp
 	rm -f `find . -iname *.o`
+	rm -f gap*.txt
