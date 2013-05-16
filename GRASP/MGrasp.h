@@ -18,8 +18,8 @@
 #define DEBUG_LEVEL4_ 4
 
 
-class MGrasp{
-
+class MGrasp
+{
  private:
     int n;
     double *l, *u;
