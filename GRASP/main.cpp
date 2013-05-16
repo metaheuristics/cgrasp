@@ -264,7 +264,7 @@ MGrasp *initMGrasp(int iFuncNum, int n, Funcao **func)
             he = 0.25;
         }
 
-        for (int i =0; i < n; i++) {
+        for (int i = 0; i < n; i++) {
             l[i] = -500.0;
             u[i] = 500.0;
         }
