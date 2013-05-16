@@ -240,7 +240,6 @@ double MGrasp::linearSearch(double *x, int i, double *gI, double h)
     return xAuxI;
 }
 
-
 // Etapa de construcao do C-Grasp
 bool MGrasp::constructGreedyRandom(double *x, double h)
 {

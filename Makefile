@@ -1,18 +1,18 @@
 FLAGS = -lpthread -g
-#LIBS=-Wall -I libGRASP -I libDTS -I libFuncao -I libUtil -I libBFGS -I /usr/local/include -I sprng/include -I .
-LIBS=-Wall -I libGRASP -I libDTS -I libFuncao -I libUtil -I libBFGS -I /usr/local/include -I .
+#LIBS=-Wall -I GRASP -I DTS -I func -I util -I BFGS -I /usr/local/include -I sprng/include -I .
+LIBS=-Wall -I GRASP -I DTS -I func -I util -I BFGS -I /usr/local/include -I .
 CC=g++
 
-libGRASPObjs = \
+GRASPObjs = \
 MGrasp.o \
 main.o
 
-libDTSObjs = \
+DTSObjs = \
 Dts.o \
 TabuList.o \
 TlElement.o
 
-libFuncaoObjs = \
+funcObjs = \
 Funcao.o \
 Rosenbrock2.o \
 Zakharov.o \
@@ -48,20 +48,20 @@ Sphere.o
 #CECRotatedWeierstrass.o \
 #CECRotatedExpScaffers.o
 
-libBFGSObjs = \
+BFGSObjs = \
 lbfgs.o \
 ap.o
 
-libUtilObjs = \
+utilObjs = \
 Util.o
 
-libGRASPObjsPre = $(addprefix libGRASP/,$(libGRASPObjs) )
-libDTSObjsPre = $(addprefix libDTS/,$(libDTSObjs) )
-libFuncaoObjsPre = $(addprefix libFuncao/,$(libFuncaoObjs) )
-libBFGSObjsPre  = $(addprefix libBFGS/, $(libBFGSObjs)  )
-libUtilObjsPre  = $(addprefix libUtil/, $(libUtilObjs)  )
+GRASPObjsPre = $(addprefix GRASP/,$(GRASPObjs) )
+DTSObjsPre = $(addprefix DTS/,$(DTSObjs) )
+funcObjsPre = $(addprefix func/,$(funcObjs) )
+BFGSObjsPre  = $(addprefix BFGS/, $(BFGSObjs)  )
+utilObjsPre  = $(addprefix util/, $(utilObjs)  )
 
-OBJECTS=$(libGRASPObjsPre) $(libDTSObjsPre) $(libFuncaoObjsPre) $(libBFGSObjsPre) $(libUtilObjsPre)
+OBJECTS=$(GRASPObjsPre) $(DTSObjsPre) $(funcObjsPre) $(BFGSObjsPre) $(utilObjsPre)
 
 all:  CGrasp
 
