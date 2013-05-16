@@ -46,6 +46,11 @@ class Funcao
     static const int ROTATEDWEIERSTRASS = 32;
     static const int ROTATEDEXPSCAFFERS = 33;
 
+    // versoes paralelas das funcoes objetivo
+    static const int PAR_SPHERE         = 101;
+
+
+    // metodos
     Funcao();
     virtual ~Funcao();
     virtual double calc(double *x);
