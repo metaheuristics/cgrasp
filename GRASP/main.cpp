@@ -42,6 +42,8 @@
 #include "Ackley.h"
 #include "Levy.h"
 #include "Sphere.h"
+#include "ParSphere.h"
+#include "sphere_gpu.h"
 /*#include "CECShiftedSphere.h"
 #include "CECShiftedSchwefel.h"
 #include "CECShiftedSchwefelNoise.h"
@@ -409,6 +411,16 @@ MGrasp *initMGrasp(int iFuncNum, int n, Funcao **func)
         *func = new Sphere(n);
         break;
 
+    case Funcao::PAR_SPHERE:
+        hs = 2.0;
+        he = 0.05;
+        for (int i =0; i < n; i++) {
+            l[i] = -2.56;
+            u[i] = 5.12;
+        }
+        *func = new ParSphere(n);
+        break;
+
     /*
     case Funcao::SHIFTEDSPHERE:
         hs = 2.0;
@@ -519,6 +531,7 @@ int getFuncNumb(char *funcName){
     if (!strcmp(funcName, "ACKLEY"))             return Funcao::ACKLEY;
     if (!strcmp(funcName, "LEVY"))               return Funcao::LEVY;
     if (!strcmp(funcName, "SPHERE"))             return Funcao::SPHERE;
+    if (!strcmp(funcName, "PARSPHERE"))          return Funcao::PAR_SPHERE;
     if (!strcmp(funcName, "SHIFTEDSPHERE"))      return Funcao::SHIFTEDSPHERE;
     if (!strcmp(funcName, "SHIFTEDSCHWEFEL"))    return Funcao::SHIFTEDSCHWEFEL;
     if (!strcmp(funcName, "SHIFTEDSCHWEFELN"))   return Funcao::SHIFTEDSCHWEFELN;
@@ -655,6 +668,13 @@ int main(int argc, char **argv)
         mediaGaps[i] = 0.0;
     }
 
+    if (iFuncNumb == Funcao::PAR_SPHERE) {
+        if (!init_gpu(n)) {
+            fprintf(stderr, "Erro inicializando GPU\n");
+            return 2;
+        }
+    }
+
     srand(time(NULL));
     for (int i = 1; i <= numIter; i++) {
         sucess = false;
@@ -723,6 +743,9 @@ int main(int argc, char **argv)
         printf("Media de avaliacao do gradiente... = %d \n", (long)((real)mediaGradEvals/contSucess));
         printf("Media de tempo... = %d \n", (long)((real)mediaTime/contSucess));
     }
+
+    if (iFuncNumb == Funcao::PAR_SPHERE)
+        finalize_gpu();
 
     return 0;
 }

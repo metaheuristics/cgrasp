@@ -1,4 +1,5 @@
 FLAGS = -lpthread -g
+NVCCFLAGS = -I GRASP -I DTS -I func -I util -I BFGS -I /usr/local/include -I . -DREAL_FLOAT --machine 64 --use_fast_math
 #LIBS=-Wall -I GRASP -I DTS -I func -I util -I BFGS -I /usr/local/include -I sprng/include -I .
 LIBS=-Wall -I GRASP -I DTS -I func -I util -I BFGS -I /usr/local/include -I . -DREAL_FLOAT
 #LIBS=-Wall -I GRASP -I DTS -I func -I util -I BFGS -I /usr/local/include -I .
@@ -41,6 +42,8 @@ Powell.o \
 DixonPrice.o \
 Ackley.o \
 Levy.o \
+ParSphere.o \
+sphere_gpu.o \
 Sphere.o
 #CECShiftedSphere.o \
 #CECShiftedSchwefel.o \
@@ -71,13 +74,25 @@ all:  CGrasp
 # CGrasp: $(OBJECTS)
 # 	$(CC) -g -o CGrasp $(OBJECTS) -L /usr/X11/lib -lm $(LIBS) $(FLAGS)
 CGrasp: $(OBJECTS)
-	$(CC) -g -o CGrasp $(OBJECTS) -lm $(LIBS) $(FLAGS)
+	$(CC) -g -o CGrasp $(OBJECTS) -lm $(LIBS) $(FLAGS) -L /Developer/NVIDIA/CUDA-5.0/lib -lcudart
 
-.c.o: $<
+# .c.o: $<
+# 	$(CC) -g -c $< -o $@ $(LIBS)
+
+# .cpp.o: $<
+# $(CC) -g -c $< -o $@ $(LIBS)
+
+# .cu.o: $<
+# 	nvcc -g -c $< -o $@ $(LIBS)
+
+%.o: %.c
 	$(CC) -g -c $< -o $@ $(LIBS)
 
-.cpp.o: $<
+%.o: %.cpp
 	$(CC) -g -c $< -o $@ $(LIBS)
+
+%.o: %.cu
+	nvcc -g -c $< -o $@ $(NVCCFLAGS)
 
 clean:
 	rm -f CGrasp
