@@ -6,11 +6,12 @@
 
 #include "MGrasp.h"
 #include "Util.h"
+#include "real.h"
 #include "Dts.h"
 
 
-MGrasp::MGrasp(int n, double* l, double *u, Funcao *func, double hs,
-               double he, double plo)
+MGrasp::MGrasp(int n, real* l, real *u, Funcao *func, real hs,
+               real he, real plo)
 {
     this->n = n;
     this->l = l;     // esta classe controla os ponteiros l e u
@@ -22,7 +23,7 @@ MGrasp::MGrasp(int n, double* l, double *u, Funcao *func, double hs,
 
     this->contIter   = 0;
 
-    this->xBest      = new double[n];
+    this->xBest      = new real[n];
     this->debug      = DEBUG_LEVEL1_;
     this->dts        = new Dts(n, l, u, func, hs, he);
     this->indexGap   = 0;
@@ -62,12 +63,12 @@ MGrasp::~MGrasp()
     }
 }
 
-double *MGrasp::getXBest()
+real *MGrasp::getXBest()
 {
     return xBest;
 }
 
-double *MGrasp::getGaps()
+real *MGrasp::getGaps()
 {
     return gaps;
 }
@@ -100,9 +101,9 @@ bool MGrasp::stopCriteria()
 int MGrasp::randSelectElement(std::list<int> rcl)
 {
     // Gera um numero aleatorio de 0 a rcl.size()-1
-    //double r = dRand();
-    double r = Util::dRand();
-    int rElement = (int)(r * (double)(rcl.size()));
+    //real r = dRand();
+    real r = Util::dRand();
+    int rElement = (int)(r * (real)(rcl.size()));
 
     int cont = 0;
     for (std::list<int>::iterator i = rcl.begin(); i != rcl.end(); i++) {
@@ -117,9 +118,9 @@ int MGrasp::randSelectElement(std::list<int> rcl)
 
 
 // Gera uma solucao aleatoria no intervalo l, u.
-void MGrasp::unifRandom(double *xAux)
+void MGrasp::unifRandom(real *xAux)
 {
-    double r;
+    real r;
 
     // Para os n indices gera
     for (int i = 0; i < n; i++) {
@@ -136,14 +137,14 @@ void MGrasp::unifRandom(double *xAux)
 // Numa busca linear, faz-se uma busca na direcao p(k) e quao distante eh aquela busca(tamanho do passo,
 // definido por a(k). Entao, o movimento gerado numa busca linear eh x(k+1) = x(k) + a(k)*p(k).
 // No caso do C-Grasp, a busca sera realizada na direcao de 'i' com tamanho de passo 'h';
-/* double MGrasp::linearSearch(double *x, int i, double *gI, double h)
+/* real MGrasp::linearSearch(real *x, int i, real *gI, real h)
 {
    bool melhorou = false;
 
-   double *xAux = new double[n];
-   double xAuxI;
-   double valX, valLinear;
-   double auxPos, auxNeg;
+   real *xAux = new real[n];
+   real xAuxI;
+   real valX, valLinear;
+   real auxPos, auxNeg;
    int numIter, numIterPos, numIterNeg;
 
    valX = func->calc(x);
@@ -162,7 +163,7 @@ void MGrasp::unifRandom(double *xAux)
 
 
    for (int j = 0; j < numIterPos; j++){
-   xAux[i] = x[i] + ((double) (1+j)*h);
+   xAux[i] = x[i] + ((real) (1+j)*h);
    //printf("P [%d]Passo = %lf - XAux[%d] = %lf \n",i, j+h*k*0.2, i, xAux[i]);
 
    // Busca linear pode produzir pontos fora dos limites da funcao.
@@ -183,7 +184,7 @@ void MGrasp::unifRandom(double *xAux)
    }
 
    for (int j = 0; j < numIterNeg; j++){
-   xAux[i] = x[i] - ((double) (1+j)*h);
+   xAux[i] = x[i] - ((real) (1+j)*h);
    //printf("P [%d]Passo = %lf - XAux[%d] = %lf \n",i, j+h*k*0.2, i, xAux[i]);
 
    // Busca linear pode produzir pontos fora dos limites da funcao.
@@ -210,16 +211,16 @@ void MGrasp::unifRandom(double *xAux)
    return xAuxI;
    }*/
 
-double MGrasp::linearSearch(double *x, int i, double *gI, double h)
+real MGrasp::linearSearch(real *x, int i, real *gI, real h)
 {
-    double *xAux = new double[n];
-    double valX, xAuxI;
-    double min;
+    real *xAux = new real[n];
+    real valX, xAuxI;
+    real min;
 
     Util::copy(xAux, x, n);
     xAux[i] = l[i];
 
-    min = std::numeric_limits<double>::max();
+    min = std::numeric_limits<real>::max();
     //min = func->calc(x);
     while( (xAux[i] < u[i]) || (Util::equals(xAux[i],u[i])) ) {
         valX = func->calc(xAux);
@@ -241,21 +242,21 @@ double MGrasp::linearSearch(double *x, int i, double *gI, double h)
 }
 
 // Etapa de construcao do C-Grasp
-bool MGrasp::constructGreedyRandom(double *x, double h)
+bool MGrasp::constructGreedyRandom(real *x, real h)
 {
     int j;
 
     bool reuse = false;
     bool imprC = false;
 
-    double *xAux, *g, *z;
-    double gMin, gMax;
-    double alpha;
-    double threshold;
+    real *xAux, *g, *z;
+    real gMin, gMax;
+    real alpha;
+    real threshold;
     std::list<int> unfixed;
     std::list<int> rcl;
 
-    double fXInit = func->calc(x);
+    real fXInit = func->calc(x);
     // unfixed = {1,2...,n}
     for (int j = 0; j < n; j++) {
         unfixed.push_back(j);
@@ -268,13 +269,13 @@ bool MGrasp::constructGreedyRandom(double *x, double h)
         printf("Alpha = %lf \n", alpha);
     }
 
-    z = new double[n];
-    g = new double[n];
+    z = new real[n];
+    g = new real[n];
 
     // Enquanto lista nao vazia
     while(unfixed.size() > 0) {
-        gMin = std::numeric_limits<double>::max();
-        gMax = std::numeric_limits<double>::min();
+        gMin = std::numeric_limits<real>::max();
+        gMax = std::numeric_limits<real>::min();
 
         for (std::list<int>::iterator i = unfixed.begin(); i != unfixed.end(); i++) {
             if (!reuse) {
@@ -350,16 +351,16 @@ bool MGrasp::constructGreedyRandom(double *x, double h)
 }
 
 
-void MGrasp::randSelectElementBh(double *x, double *xBestAux, double h)
+void MGrasp::randSelectElementBh(real *x, real *xBestAux, real h)
 {
     int auxI;
-    double gridI;
-    double numPointsPos, numPointsNeg;
-    double numPoints = 0.0;
-    double r, normaVector;
-    double *xGrid = new double[n];
-    double *bhSelected = new double[n];
-    double aux = 0.0, distancia = 0.0;
+    real gridI;
+    real numPointsPos, numPointsNeg;
+    real numPoints = 0.0;
+    real r, normaVector;
+    real *xGrid = new real[n];
+    real *bhSelected = new real[n];
+    real aux = 0.0, distancia = 0.0;
 
     // Escolhe aleatoriamente um ponto do Grid de tamanho de passo h.
     for (int i = 0; i < n; i++) {
@@ -372,12 +373,12 @@ void MGrasp::randSelectElementBh(double *x, double *xBestAux, double h)
         // Escolhe aleatoriamente um dos indices do Grid na direcao i.
         //r = dRand();
         r = Util::dRand();
-        auxI = (int)(r * (double)numPoints);
+        auxI = (int)(r * (real)numPoints);
 
-        gridI = ((double)auxI - numPointsNeg);
+        gridI = ((real)auxI - numPointsNeg);
 
         // Calcula a posicao da direcao no eixo i.
-        xGrid[i] = xBestAux[i] + ((double)gridI*h);
+        xGrid[i] = xBestAux[i] + ((real)gridI*h);
     }
 
     // Calcula a projecao do vetor de x a xGrid.
@@ -401,7 +402,7 @@ void MGrasp::randSelectElementBh(double *x, double *xBestAux, double h)
 }
 
 
-bool MGrasp::verifyGap(double fX, int maxEvals)
+bool MGrasp::verifyGap(real fX, int maxEvals)
 {
     if (maxEvals && (func->getFnEvals() > evals[indexGap])) {
         if (fX < fBest) {
@@ -423,18 +424,18 @@ bool MGrasp::verifyGap(double fX, int maxEvals)
 
 bool MGrasp::start(bool hibrid, int m, int maxEvals)
 {
-    double *x = new double[n];
-    double fX, fXAnt;
-    double h;
+    real *x = new real[n];
+    real fX, fXAnt;
+    real h;
     bool imprC;
     bool imprL;
     int cont = 0;
-    double epsg, epsf, epsx;
+    real epsg, epsf, epsx;
     ap::real_1d_array xBFGS;
     int info;
     LBFGS *lbfgs = NULL;
 
-    double maxiters = 0.0;
+    real maxiters = 0.0;
     if (hibrid) {
         epsg = 0.000001;
         epsf = 0.000001;
@@ -443,7 +444,7 @@ bool MGrasp::start(bool hibrid, int m, int maxEvals)
         lbfgs = new LBFGS(func, false);
     }
 
-    fBest = std::numeric_limits<double>::max();
+    fBest = std::numeric_limits<real>::max();
     fXAnt = fBest;
     while (!stopCriteria()) {
         unifRandom(x);
@@ -540,7 +541,7 @@ bool MGrasp::start(bool hibrid, int m, int maxEvals)
                         return false;
                     }
 
-                    double *grad = new double[n];
+                    real *grad = new real[n];
                     ap::real_1d_array g;
                     g.setbounds(1, n);
                     func->calcGrad(xBFGS,g);

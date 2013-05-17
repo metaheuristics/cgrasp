@@ -3,40 +3,41 @@
 
 #include <math.h>
 
+#include "real.h"
 #include "Funcao.h"
 #include "TlElement.h"
 
-class TabuList{
-	
-	private:
-		int n;		
-		int length;
-		int numElements;
-		
-		double nMax;
-		double nMin;
-		double uMax;
-		double uMin;
+class TabuList
+{
+ private:
+    int n;
+    int length;
+    int numElements;
 
-		TlElement **list;
-					
-	public:
-		
-		TabuList(int length, int n);
-		virtual ~TabuList();
-		
-		int getNumberElements();
-		int getLength();	
-		double *getX(int i);
-		TlElement *getElement(int i);
-		
-		bool isSemiTR(double *xSTR, double *x, double rSTR);
-		bool isAnySemiTR(double *x, double rSTR);
+    real nMax;
+    real nMin;
+    real uMax;
+    real uMin;
 
-		void insertElement(double *x, int n, int fX);
-		
-		bool isInList(double *x, int n);
-		void clear();	
+    TlElement **list;
+
+ public:
+
+    TabuList(int length, int n);
+    virtual ~TabuList();
+
+    int getNumberElements();
+    int getLength();
+    real *getX(int i);
+    TlElement *getElement(int i);
+
+    bool isSemiTR(real *xSTR, real *x, real rSTR);
+    bool isAnySemiTR(real *x, real rSTR);
+
+    void insertElement(real *x, int n, int fX);
+
+    bool isInList(real *x, int n);
+    void clear();
 };
 
 #endif /*TABU_LIST_H*/

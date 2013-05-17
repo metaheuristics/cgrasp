@@ -22,14 +22,14 @@ int Bohachevsky::getFnEvals(){
 	return cont;	
 }
 
-double Bohachevsky::getGap(){
+real Bohachevsky::getGap(){
 	return (bestValue - minValue);
 }
 
-bool Bohachevsky::isNearOptimum(double fBest){
+bool Bohachevsky::isNearOptimum(real fBest){
 	cont++;
-	double deltaValue =	fabs(fBest - minValue);
-	double equation;
+	real deltaValue =	fabs(fBest - minValue);
+	real equation;
 	
 	equation = minValue*0.0001 + 0.000001;	
 	if ((deltaValue < equation) || (Util::equals(deltaValue, equation))){
@@ -39,9 +39,9 @@ bool Bohachevsky::isNearOptimum(double fBest){
 	return false;
 }
 
-double Bohachevsky::calc(double *x){
+real Bohachevsky::calc(real *x){
 	cont++;  
-	long double value = 0, pi=3.14159265;
+	real value = 0, pi=3.14159265;
 
 	value = pow(x[0],2) + 2.0*pow(x[1],2) - 0.3*cos(3*pi*x[0]) - 0.4*cos(4*pi*x[1]) + 0.7;
 
@@ -49,8 +49,8 @@ double Bohachevsky::calc(double *x){
 }
 
 
-double Bohachevsky::calc2(ap::real_1d_array x){
-	double y = 0.0;	
+real Bohachevsky::calc2(ap::real_1d_array x){
+	real y = 0.0;	
 	return y;
 
 }

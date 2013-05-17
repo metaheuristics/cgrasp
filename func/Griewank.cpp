@@ -22,13 +22,13 @@ int Griewank::getFnEvals(){
 	return cont;	
 }
 
-double Griewank::getGap(){
+real Griewank::getGap(){
 	return (bestValue - minValue);
 }
 
-bool Griewank::isNearOptimum(double fBest){
-	double deltaValue =	fabs(fBest - minValue);
-	double equation;
+bool Griewank::isNearOptimum(real fBest){
+	real deltaValue =	fabs(fBest - minValue);
+	real equation;
 	
 	equation = minValue*0.0001 + 0.000001;	
 	if ((deltaValue < equation) || (Util::equals(deltaValue, equation))){
@@ -38,13 +38,13 @@ bool Griewank::isNearOptimum(double fBest){
 	return false;
 }
 
-double Griewank::calc(double *x){
+real Griewank::calc(real *x){
 	cont++;
-	long double value = 0, sum = 0, prod = 1;
+	real value = 0, sum = 0, prod = 1;
 	int i;
 
 	for (i =0; i<n; i++){		sum += pow(x[i],2)/4000;
-		prod *= cos(x[i]/sqrt((long double) i + 1));
+		prod *= cos(x[i]/sqrt((real) i + 1));
 	}
 	value = sum - prod + 1;
 
@@ -52,8 +52,8 @@ double Griewank::calc(double *x){
 }
 
 
-double Griewank::calc2(ap::real_1d_array x){
-	double y = 0.0;	
+real Griewank::calc2(ap::real_1d_array x){
+	real y = 0.0;	
 	return y;
 
 }

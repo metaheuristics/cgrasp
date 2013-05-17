@@ -20,14 +20,14 @@ int SumSquares::getFnEvals(){
 	return cont;	
 }
 
-double SumSquares::getGap(){
+real SumSquares::getGap(){
 	return (bestValue - minValue);
 }
 
 
-bool SumSquares::isNearOptimum(double fBest){
-	double deltaValue =	fabs(fBest - minValue);
-	double equation;
+bool SumSquares::isNearOptimum(real fBest){
+	real deltaValue =	fabs(fBest - minValue);
+	real equation;
 	
 	equation = fabs(minValue)*0.0001 + 0.000001;	
 	//equation = fabs(bestValue)*0.0001 + 0.01;	
@@ -38,9 +38,9 @@ bool SumSquares::isNearOptimum(double fBest){
 	return false;
 }
 
-double SumSquares::calc(double *x){
-	double som1 = 0.0;
-	double fx = 0.0; 
+real SumSquares::calc(real *x){
+	real som1 = 0.0;
+	real fx = 0.0; 
 	cont++;
 	
 	for (int i = 0; i < n; i++){		som1 += (i+1)*(x[i]*x[i]);
@@ -51,9 +51,9 @@ double SumSquares::calc(double *x){
 	return fx;
 }
 
-double SumSquares::calc2(ap::real_1d_array x){
-	double som1 = 0.0;
-	double fx = 0.0; 
+real SumSquares::calc2(ap::real_1d_array x){
+	real som1 = 0.0;
+	real fx = 0.0; 
 	cont++;
 	
 	for (int i = 0; i < n; i++){		som1 += (i+1)*(x(i+1)*x(i+1));

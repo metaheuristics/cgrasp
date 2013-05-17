@@ -6,6 +6,7 @@
 #include "Funcao.h"
 #include "TabuList.h"
 #include "MersenneTwister.h"
+#include "real.h"
 
 #include <list>
 #define DEBUG_LEVEL1_ 1
@@ -18,28 +19,28 @@ class Dts
 {
  private:
     int n;
-    double *l, *u;
-    double hs, he;
+    real *l, *u;
+    real hs, he;
 
-    double rTR, rSTR;
+    real rTR, rSTR;
     Funcao *func;
     TabuList *tl;
     int debug;
 
-    double *calcCentroide(double *x, double *dMax);
+    real *calcCentroide(real *x, real *dMax);
 
  public:
-    static const double GOLDEN_RATIO = 1.61803399;
+    static const real GOLDEN_RATIO = 1.61803399;
 
-    double *goldenSearch(double *x, double *v, double *fXAux, double h, bool *imprL);
+    real *goldenSearch(real *x, real *v, real *fXAux, real h, bool *imprL);
 
-    bool neighborhoodSearch(double *x, double *fXAux, double h, double *dir);
-    bool localSearch(double *x, double *fXAux, double h, double *dir);
-    bool explorationSearch(double *x, double *fXAux, double h);
-    //void perturbe(double *x, double h);
-    void perturbe(double *x, double *xBestAux, double h);
+    bool neighborhoodSearch(real *x, real *fXAux, real h, real *dir);
+    bool localSearch(real *x, real *fXAux, real h, real *dir);
+    bool explorationSearch(real *x, real *fXAux, real h);
+    //void perturbe(real *x, real h);
+    void perturbe(real *x, real *xBestAux, real h);
 
-    Dts(int n, double* l, double *u, Funcao *f, double hs, double he);
+    Dts(int n, real* l, real *u, Funcao *f, real hs, real he);
     virtual ~Dts();
 };
 

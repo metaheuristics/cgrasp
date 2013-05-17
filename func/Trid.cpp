@@ -27,13 +27,13 @@ int Trid::getFnEvals(){
 	return cont;	
 }
 
-double Trid::getGap(){
+real Trid::getGap(){
 	return (bestValue - minValue);
 }
 
-bool Trid::isNearOptimum(double fBest){
-	double deltaValue =	fabs(fBest - minValue);
-	double equation;
+bool Trid::isNearOptimum(real fBest){
+	real deltaValue =	fabs(fBest - minValue);
+	real equation;
 	
 	equation = minValue*0.0001 + 0.000001;	
 	if ((deltaValue < equation) || (Util::equals(deltaValue, equation))){
@@ -43,9 +43,9 @@ bool Trid::isNearOptimum(double fBest){
 	return false;
 }
 
-double Trid::calc(double *x){
+real Trid::calc(real *x){
 	cont++;
-	long double value = 0;
+	real value = 0;
 	int i;
 
 	for (i = 0; i < n; i++)
@@ -58,8 +58,8 @@ double Trid::calc(double *x){
 }
 
 
-double Trid::calc2(ap::real_1d_array x){
-	double y = 0.0;	
+real Trid::calc2(ap::real_1d_array x){
+	real y = 0.0;	
 	return y;
 
 }

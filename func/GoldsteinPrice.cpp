@@ -24,14 +24,14 @@ int GoldsteinPrice::getFnEvals(){
 	return cont;	
 }
 
-double GoldsteinPrice::getGap(){
+real GoldsteinPrice::getGap(){
 	return (bestValue - minValue);
 }
 
-bool GoldsteinPrice::isNearOptimum(double fBest){
-	//double bestValue = 3.0;
-	double deltaValue =	fabs(fBest - minValue);
-	double equation;
+bool GoldsteinPrice::isNearOptimum(real fBest){
+	//real bestValue = 3.0;
+	real deltaValue =	fabs(fBest - minValue);
+	real equation;
 	
 	equation = fabs(minValue)*0.0001 + 0.000001;	
 	if ((deltaValue < equation) || (Util::equals(deltaValue, equation))){
@@ -41,9 +41,9 @@ bool GoldsteinPrice::isNearOptimum(double fBest){
 	return false;
 }
 
-double GoldsteinPrice::calc(double *x){
+real GoldsteinPrice::calc(real *x){
 	cont++;
-	long double fX;
+	real fX;
 
 	fX = (1 + pow(x[0] + x[1] +1,2)*(19 -14*x[0] + 3*pow(x[0],2) -14*x[1] + 6*x[0]*x[1] + 3*pow(x[1],2))) *
           (30 + pow(2*x[0] - 3*x[1],2)*(18 - 32*x[0] + 12*pow(x[0],2) +48*x[1] - 36*x[0]*x[1] + 27*pow(x[1],2)));
@@ -51,9 +51,9 @@ double GoldsteinPrice::calc(double *x){
 	return fX; 
 }
 
-double GoldsteinPrice::calc2(ap::real_1d_array x){
+real GoldsteinPrice::calc2(ap::real_1d_array x){
 	cont++;
-	long double fX;
+	real fX;
 
 	fX = (1 + pow(x(1) + x(2) +1,2)*(19 -14*x(1) + 3*pow(x(1),2) -14*x(2) + 6*x(1)*x(2) + 3*pow(x(2),2))) *
           (30 + pow(2*x(1) - 3*x(2),2)*(18 - 32*x(1) + 12*pow(x(1),2) +48*x(2) - 36*x(1)*x(2) + 27*pow(x(2),2)));
@@ -67,8 +67,8 @@ void GoldsteinPrice::calcGrad(ap::real_1d_array &x, ap::real_1d_array &g){
   contGrad++;
 
 	// Numerical calculations of gradients
-  const double step = 1e-6;
-  double fX, fXplus;
+  const real step = 1e-6;
+  real fX, fXplus;
   int i;
 
   ap::real_1d_array xlocal(2);

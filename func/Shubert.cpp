@@ -28,14 +28,14 @@ int Shubert::getGradEvals(){
 	return contGrad;	
 }
 
-double Shubert::getGap(){
+real Shubert::getGap(){
 	return (bestValue - minValue);
 }
 
-bool Shubert::isNearOptimum(double fBest){
-	//double bestValue = -186.7309;
-	double deltaValue =	fabs(fBest - minValue);
-	double equation;
+bool Shubert::isNearOptimum(real fBest){
+	//real bestValue = -186.7309;
+	real deltaValue =	fabs(fBest - minValue);
+	real equation;
 	
 	equation = fabs(minValue)*0.0001 + 0.000001;	
 	if ((deltaValue < equation) || (Util::equals(deltaValue, equation))){
@@ -45,9 +45,9 @@ bool Shubert::isNearOptimum(double fBest){
 	return false;
 }
 
-double Shubert::calc(double *x){
+real Shubert::calc(real *x){
 	cont++;
-	long double value;
+	real value;
 
   	value = (cos(2*x[0] +1) + 2*cos(3*x[0] +2) + 3*cos(4*x[0] +3) +
     	       4*cos(5*x[0] +4) + 5*cos(6*x[0] +5)) * (cos(2*x[1] +1) + 2*cos(3*x[1] +2) +
@@ -56,9 +56,9 @@ double Shubert::calc(double *x){
 }
 
 
-double Shubert::calc2(ap::real_1d_array x){
+real Shubert::calc2(ap::real_1d_array x){
 	cont++;
-	long double value;
+	real value;
 
   	value = (cos(2*x(1) +1) + 2*cos(3*x(1) +2) + 3*cos(4*x(1) +3) +
     	       4*cos(5*x(1) +4) + 5*cos(6*x(1) +5)) * (cos(2*x(2) +1) + 2*cos(3*x(2) +2) +

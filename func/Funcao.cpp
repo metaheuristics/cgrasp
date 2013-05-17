@@ -1,45 +1,53 @@
 #include "Funcao.h"
 #include <limits>
 
-Funcao::Funcao(){
-	cont = 0;
-	contGrad = 0;	
-	bestValue = std::numeric_limits<double>::max();
+Funcao::Funcao()
+{
+    cont = 0;
+    contGrad = 0;
+    bestValue = std::numeric_limits<real>::max();
 }
 
-Funcao::~Funcao(){
+Funcao::~Funcao()
+{
 }
 
-int Funcao::getGradEvals(){
-	return contGrad;	
+int Funcao::getGradEvals()
+{
+    return contGrad;
 }
 
-int Funcao::getFnEvals(){
-	return cont;	
+int Funcao::getFnEvals()
+{
+    return cont;
 }
 
-double Funcao::getGap(){
-	return std::numeric_limits<double>::max();
+real Funcao::getGap()
+{
+    return std::numeric_limits<real>::max();
 }
 
-void Funcao::setBestValue(double fX){
-	bestValue = fX;
-}
-		
-bool Funcao::isNearOptimum(double fBest){
-	return true;
-}
-		
-double Funcao::calc(double *x){
-	return 0.0;
+void Funcao::setBestValue(real fX)
+{
+    bestValue = fX;
 }
 
-double Funcao::calc2(ap::real_1d_array x){
-	return 0.0;
+bool Funcao::isNearOptimum(real fBest)
+{
+    return true;
 }
 
-void Funcao::calcGrad(ap::real_1d_array &x, ap::real_1d_array &g){
-	return;
+real Funcao::calc(real *x)
+{
+    return 0.0;
 }
 
+real Funcao::calc2(ap::real_1d_array x)
+{
+    return 0.0;
+}
 
+void Funcao::calcGrad(ap::real_1d_array &x, ap::real_1d_array &g)
+{
+    return;
+}

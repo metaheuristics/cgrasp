@@ -16,11 +16,11 @@ class Rosenbrock2: public Funcao{
 		void setFnEvals(int c);
 		virtual int getFnEvals();
 		virtual int getGradEvals();
-		virtual double getGap();
+		virtual real getGap();
 
-		virtual bool isNearOptimum(double fBest);				
-		virtual double calc(double *x);
-		virtual double calc2(ap::real_1d_array x);
+		virtual bool isNearOptimum(real fBest);				
+		virtual real calc(real *x);
+		virtual real calc2(ap::real_1d_array x);
 		virtual void calcGrad(ap::real_1d_array &x, ap::real_1d_array &g);
 		
 };

@@ -31,12 +31,12 @@ int Shekel::getFnEvals(){
 	return cont;	
 }
 
-double Shekel::getGap(){
+real Shekel::getGap(){
 	return (bestValue - minValue);
 }
 
-bool Shekel::isNearOptimum(double fBest){
-	/*double bestValue = -1.0;
+bool Shekel::isNearOptimum(real fBest){
+	/*real bestValue = -1.0;
 	switch(m){
 		case 5: bestValue = -10.15319538;
 				break;
@@ -46,8 +46,8 @@ bool Shekel::isNearOptimum(double fBest){
 				break;
 	}*/
 
-	double deltaValue =	fabs(fBest - minValue);
-	double equation;
+	real deltaValue =	fabs(fBest - minValue);
+	real equation;
 	
 	equation = fabs(minValue)*0.0001 + 0.000001;	
 	if ((deltaValue < equation) || (Util::equals(deltaValue, equation))){
@@ -57,12 +57,12 @@ bool Shekel::isNearOptimum(double fBest){
 	return false;
 }
 
-double Shekel::calc(double *x){
+real Shekel::calc(real *x){
 	cont++;
-	long double value,sum,totsum,temp;
-  	long double a[10][4]={{4,4,4,4},{1,1,1,1},{8,8,8,8},{6,6,6,6},{3,7,3,7},{2,9,2,9},
+	real value,sum,totsum,temp;
+  	real a[10][4]={{4,4,4,4},{1,1,1,1},{8,8,8,8},{6,6,6,6},{3,7,3,7},{2,9,2,9},
                    {5,5,3,3},{8,1,8,1},{6,2,6,2},{7,3.6,7,3.6}};
-  	long double c[10]={0.1,0.2,0.2,0.4,0.4,0.6,0.3,0.7,0.5,0.5};
+  	real c[10]={0.1,0.2,0.2,0.4,0.4,0.6,0.3,0.7,0.5,0.5};
   	int i,j;
 
   	totsum = 0;
@@ -82,12 +82,12 @@ double Shekel::calc(double *x){
  }
 
 
- double Shekel::calc2(ap::real_1d_array x){
+ real Shekel::calc2(ap::real_1d_array x){
  	cont++;
-	long double value,sum,totsum,temp;
-  	long double a[10][4]={{4,4,4,4},{1,1,1,1},{8,8,8,8},{6,6,6,6},{3,7,3,7},{2,9,2,9},
+	real value,sum,totsum,temp;
+  	real a[10][4]={{4,4,4,4},{1,1,1,1},{8,8,8,8},{6,6,6,6},{3,7,3,7},{2,9,2,9},
                    {5,5,3,3},{8,1,8,1},{6,2,6,2},{7,3.6,7,3.6}};
-  	long double c[10]={0.1,0.2,0.2,0.4,0.4,0.6,0.3,0.7,0.5,0.5};
+  	real c[10]={0.1,0.2,0.2,0.4,0.4,0.6,0.3,0.7,0.5,0.5};
   	int i,j;
 
   	totsum = 0;
@@ -108,10 +108,10 @@ double Shekel::calc(double *x){
  // Calculando o gradiente
  void Shekel::calcGrad(ap::real_1d_array &x, ap::real_1d_array &g){
 	contGrad++;
-	long double value,sum,totsum,temp;
-  	long double a[10][4]={{4,4,4,4},{1,1,1,1},{8,8,8,8},{6,6,6,6},{3,7,3,7},{2,9,2,9},
+	real value,sum,totsum,temp;
+  	real a[10][4]={{4,4,4,4},{1,1,1,1},{8,8,8,8},{6,6,6,6},{3,7,3,7},{2,9,2,9},
                    {5,5,3,3},{8,1,8,1},{6,2,6,2},{7,3.6,7,3.6}};
-  	long double c[10]={0.1,0.2,0.2,0.4,0.4,0.6,0.3,0.7,0.5,0.5};
+  	real c[10]={0.1,0.2,0.2,0.4,0.4,0.6,0.3,0.7,0.5,0.5};
   	int i,j;
 
 	

@@ -22,13 +22,13 @@ int Powell::getFnEvals(){
 	return cont;	
 }
 
-double Powell::getGap(){
+real Powell::getGap(){
 	return (bestValue - minValue);
 }
 
-bool Powell::isNearOptimum(double fBest){
-	double deltaValue =	fabs(fBest - minValue);
-	double equation;
+bool Powell::isNearOptimum(real fBest){
+	real deltaValue =	fabs(fBest - minValue);
+	real equation;
 	
 	equation = minValue*0.0001 + 0.000001;	
 	if ((deltaValue < equation) || (Util::equals(deltaValue, equation))){
@@ -38,17 +38,17 @@ bool Powell::isNearOptimum(double fBest){
 	return false;
 }
 
-double Powell::calc(double *x){
+real Powell::calc(real *x){
 	cont++;
-	long double value;
+	real value;
 
 	value = pow(x[0] + 10*x[1],2) + 5*pow(x[2]-x[3],2) + pow(x[1] - 2*x[2],4) + 10*pow(x[0]-x[3],4);
 	return value;
 }
 
 
-double Powell::calc2(ap::real_1d_array x){
-	double y = 0.0;	
+real Powell::calc2(ap::real_1d_array x){
+	real y = 0.0;	
 	return y;
 
 }

@@ -22,13 +22,13 @@ int Colville::getFnEvals(){
 	return cont;	
 }
 
-double Colville::getGap(){
+real Colville::getGap(){
 	return (bestValue - minValue);
 }
 
-bool Colville::isNearOptimum(double fBest){
-	double deltaValue =	fabs(fBest - minValue);
-	double equation;
+bool Colville::isNearOptimum(real fBest){
+	real deltaValue =	fabs(fBest - minValue);
+	real equation;
 	
 	equation = minValue*0.0001 + 0.000001;	
 	if ((deltaValue < equation) || (Util::equals(deltaValue, equation))){
@@ -38,9 +38,9 @@ bool Colville::isNearOptimum(double fBest){
 	return false;
 }
 
-double Colville::calc(double *x){
+real Colville::calc(real *x){
 	cont++;	
-	long double value;
+	real value;
 
 	value = 100*pow(x[1] - pow(x[0],2),2) + pow(1-x[0],2) + 90*pow(x[3]-pow(x[2],2),2) +
           pow(1-x[2],2) + 10.1*(pow(x[1] -1,2) + pow(x[3] -1,2)) + 19.8*(x[1] -1)*(x[3] -1);
@@ -49,8 +49,8 @@ double Colville::calc(double *x){
 }
 
 
-double Colville::calc2(ap::real_1d_array x){
-	double y = 0.0;	
+real Colville::calc2(ap::real_1d_array x){
+	real y = 0.0;	
 	return y;
 
 }

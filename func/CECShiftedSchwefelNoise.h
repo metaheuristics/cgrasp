@@ -13,26 +13,26 @@ class CECShiftedSchwefelNoise: public Funcao{
 		int n;
 		int cont;
 		
-		double *o;
+		real *o;
 		
 		// Variable declarations for the random number generator 
 		int rndcalcflag;
-		long double rndx1, rndx2;
+		real rndx1, rndx2;
 
 		// Function declarations for the random number generator 
 		void randomize();		
-		long double randomperc();
-		long double randomnormaldeviate();
+		real randomperc();
+		real randomnormaldeviate();
 
 	public:
 		CECShiftedSchwefelNoise(int n);
 		virtual ~CECShiftedSchwefelNoise();
 		virtual int getFnEvals();
 		void setFnEvals(int c);
-		virtual bool isNearOptimum(double fBest);				
-		virtual double calc(double *x);
-		virtual double getGap();
-		virtual double calc2(ap::real_1d_array x);
+		virtual bool isNearOptimum(real fBest);				
+		virtual real calc(real *x);
+		virtual real getGap();
+		virtual real calc2(ap::real_1d_array x);
 		virtual void calcGrad(ap::real_1d_array &x, ap::real_1d_array &g);
 };
 

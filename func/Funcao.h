@@ -2,14 +2,15 @@
 #define FUNCAO_H_
 
 #include "ap.h"
+#include "real.h"
 
 class Funcao
 {
  protected:
     int cont;
     int contGrad;
-    double minValue;
-    double bestValue;
+    real minValue;
+    real bestValue;
 
  public:
     static const int ROSENBROCK         = 1;
@@ -53,15 +54,15 @@ class Funcao
     // metodos
     Funcao();
     virtual ~Funcao();
-    virtual double calc(double *x);
-    virtual double calc2(ap::real_1d_array x);
+    virtual real calc(real *x);
+    virtual real calc2(ap::real_1d_array x);
     virtual void calcGrad(ap::real_1d_array &x, ap::real_1d_array &g);
-    virtual bool isNearOptimum(double fBest);
+    virtual bool isNearOptimum(real fBest);
     virtual int getFnEvals();
     virtual int getGradEvals();
-    virtual double getGap();
+    virtual real getGap();
 
-    void setBestValue(double fX);
+    void setBestValue(real fX);
 };
 
 #endif /*FUNCAO_H_*/

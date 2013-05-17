@@ -1,6 +1,7 @@
 FLAGS = -lpthread -g
 #LIBS=-Wall -I GRASP -I DTS -I func -I util -I BFGS -I /usr/local/include -I sprng/include -I .
-LIBS=-Wall -I GRASP -I DTS -I func -I util -I BFGS -I /usr/local/include -I .
+LIBS=-Wall -I GRASP -I DTS -I func -I util -I BFGS -I /usr/local/include -I . -DREAL_FLOAT
+#LIBS=-Wall -I GRASP -I DTS -I func -I util -I BFGS -I /usr/local/include -I .
 CC=g++
 
 GRASPObjs = \

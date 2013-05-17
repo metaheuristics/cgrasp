@@ -22,13 +22,13 @@ int Ackley::getFnEvals(){
 	return cont;	
 }
 
-double Ackley::getGap(){
+real Ackley::getGap(){
 	return (bestValue - minValue);
 }
 
-bool Ackley::isNearOptimum(double fBest){
-	double deltaValue =	fabs(fBest - minValue);
-	double equation;
+bool Ackley::isNearOptimum(real fBest){
+	real deltaValue =	fabs(fBest - minValue);
+	real equation;
 	
 	equation = minValue*0.0001 + 0.000001;	
 	if ((deltaValue < equation) || (Util::equals(deltaValue, equation))){
@@ -38,21 +38,21 @@ bool Ackley::isNearOptimum(double fBest){
 	return false;
 }
 
-double Ackley::calc(double *x){
+real Ackley::calc(real *x){
 	cont++;
-	long double value, sum1=0, sum2=0, pi=3.14159265;
+	real value, sum1=0, sum2=0, pi=3.14159265;
 	int i;
-	long double value1, value2, value3;
+	real value1, value2, value3;
 
 	for (i = 0; i < n; i++)
-		sum1 += pow(x[i], (long double) 2);
+		sum1 += pow(x[i], (real) 2);
 
 	for (i = 0; i < n; i++)
     	sum2 += cos(2 * pi * x[i]);
 	
-	value1 = -20*exp((long double) (-0.2* (long double) sqrt((long double) sum1/n)));
-	value2 = - exp((long double) (sum2/n));
-	value3 =  20 + exp((long double) 1);
+	value1 = -20*exp((real) (-0.2* (real) sqrt((real) sum1/n)));
+	value2 = - exp((real) (sum2/n));
+	value3 =  20 + exp((real) 1);
 	
 	value = value1 + value2 + value3;
 
@@ -60,8 +60,8 @@ double Ackley::calc(double *x){
 }
 
 
-double Ackley::calc2(ap::real_1d_array x){
-	double y = 0.0;	
+real Ackley::calc2(ap::real_1d_array x){
+	real y = 0.0;	
 	return y;
 
 }

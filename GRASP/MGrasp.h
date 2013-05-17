@@ -10,6 +10,8 @@
 #include "lbfgs.h"
 #include "ap.h"
 
+#include "real.h"
+
 #include <list>
 #define DEBUG_LEVEL0_ 0
 #define DEBUG_LEVEL1_ 1
@@ -22,15 +24,15 @@ class MGrasp
 {
  private:
     int n;
-    double *l, *u;
-    double hs, he;
-    double plo;
+    real *l, *u;
+    real hs, he;
+    real plo;
 
     Funcao *func;
 
     int contIter;
-    double fBest;
-    double *xBest;
+    real fBest;
+    real *xBest;
 
     MTRand *mtRand;
     int debug;
@@ -38,37 +40,37 @@ class MGrasp
     Dts *dts;
 
     int    evals[7];
-    double gaps[7];
+    real gaps[7];
     int indexGap;
 
  protected:
 
  public:
     static const int MAX_ITERACOES = 20;
-    static const double GOLDEN_RATIO = 1.61803399;
+    static const real GOLDEN_RATIO = 1.61803399;
 
-    double *getXBest();
-    double *getGaps();
+    real *getXBest();
+    real *getGaps();
     bool   stopCriteria();
     int    randSelectElement(std::list<int> rcl);
-    void   unifRandom(double *xAux);
-    double linearSearch(double *x, int i, double *gI, double h);
-    double goldenSearch(double *x, int i, double *gI, double h);
+    void   unifRandom(real *xAux);
+    real linearSearch(real *x, int i, real *gI, real h);
+    real goldenSearch(real *x, int i, real *gI, real h);
 
-    void perturbe(double *x, double h);
+    void perturbe(real *x, real h);
 
-    void randSelectElementBh(double *x, double *xBestAux, double h);
-    bool constructGreedyRandom(double *x, double h);
-    //bool localImprovement(double *x, double h);
-    bool localImprovementTS(double *x, double *fXAux, double h);
-    bool localImprovement(double *x, double *fX, double h);
+    void randSelectElementBh(real *x, real *xBestAux, real h);
+    bool constructGreedyRandom(real *x, real h);
+    //bool localImprovement(real *x, real h);
+    bool localImprovementTS(real *x, real *fXAux, real h);
+    bool localImprovement(real *x, real *fX, real h);
 
-    bool verifyGap(double fX, int maxEvals);
+    bool verifyGap(real fX, int maxEvals);
     bool start(bool hibrid, int m, int maxEvals);
 
     void setDebugLevel(int dbglvl)           {   this->debug = dbglvl;   }
 
-    MGrasp(int n, double* l, double *u, Funcao *f, double hs, double he, double plo);
+    MGrasp(int n, real* l, real *u, Funcao *f, real hs, real he, real plo);
     virtual ~MGrasp();
 };
 

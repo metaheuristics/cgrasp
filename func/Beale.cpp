@@ -22,13 +22,13 @@ int Beale::getFnEvals(){
 	return cont;	
 }
 
-double Beale::getGap(){
+real Beale::getGap(){
 	return (bestValue - minValue);
 }
 
-bool Beale::isNearOptimum(double fBest){
-	double deltaValue =	fabs(fBest - minValue);
-	double equation;
+bool Beale::isNearOptimum(real fBest){
+	real deltaValue =	fabs(fBest - minValue);
+	real equation;
 	
 	equation = minValue*0.0001 + 0.000001;	
 	if ((deltaValue < equation) || (Util::equals(deltaValue, equation))){
@@ -38,9 +38,9 @@ bool Beale::isNearOptimum(double fBest){
 	return false;
 }
 
-double Beale::calc(double *x){
+real Beale::calc(real *x){
 	cont++;	
-	long double value,value1,value2,value3;
+	real value,value1,value2,value3;
 
 	value1 = pow(1.5 - x[0]*(1 -x[1]),2);
 	value2 = pow(2.25 -x[0]*(1 - pow(x[1],2)),2);
@@ -51,8 +51,8 @@ double Beale::calc(double *x){
 }
 
 
-double Beale::calc2(ap::real_1d_array x){
-	double y = 0.0;	
+real Beale::calc2(ap::real_1d_array x){
+	real y = 0.0;	
 	return y;
 }
 

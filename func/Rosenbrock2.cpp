@@ -27,14 +27,14 @@ int Rosenbrock2::getGradEvals(){
 	return contGrad;	
 }
 
-double Rosenbrock2::getGap(){
+real Rosenbrock2::getGap(){
 	return (bestValue - minValue);
 }
 
-bool Rosenbrock2::isNearOptimum(double fBest){
-	//double minValue = 0.0;
-	double deltaValue =	fabs(fBest - minValue);
-	double equation;
+bool Rosenbrock2::isNearOptimum(real fBest){
+	//real minValue = 0.0;
+	real deltaValue =	fabs(fBest - minValue);
+	real equation;
 	
 	equation = fabs(minValue)*0.0001 + 0.000001;	
 	//equation = fabs(bestValue)*0.0001 + 0.01;	
@@ -46,9 +46,9 @@ bool Rosenbrock2::isNearOptimum(double fBest){
 
 }
 
-double Rosenbrock2::calc(double *x){
-	double parent1, parent2;
-	double fx = 0.0; 
+real Rosenbrock2::calc(real *x){
+	real parent1, parent2;
+	real fx = 0.0; 
 	cont++;
 		
 	for (int i = 0; i < n-1; i++){		parent1 = pow(((x[i]*x[i]) - x[i+1]), 2); //(x[0]^2 - x[1])^2
@@ -62,9 +62,9 @@ double Rosenbrock2::calc(double *x){
 	return fx;
 }
 
-double Rosenbrock2::calc2(ap::real_1d_array x){
-	double parent1, parent2;
-	double fx = 0.0; 
+real Rosenbrock2::calc2(ap::real_1d_array x){
+	real parent1, parent2;
+	real fx = 0.0; 
 	cont++;
 	for (int i = 1; i < n; i++){		parent1 = pow(((x(i)*x(i))-x(i+1)), 2); //(x[0]^2 - x[1])^2
 		parent2 = pow((x(i) - 1), 2);           //(x[0] - 1)^2

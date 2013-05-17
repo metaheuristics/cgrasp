@@ -22,13 +22,13 @@ int Schwefel::getFnEvals(){
 	return cont;	
 }
 
-double Schwefel::getGap(){
+real Schwefel::getGap(){
 	return (bestValue - minValue);
 }
 
-bool Schwefel::isNearOptimum(double fBest){
-	double deltaValue =	fabs(fBest - minValue);
-	double equation;
+bool Schwefel::isNearOptimum(real fBest){
+	real deltaValue =	fabs(fBest - minValue);
+	real equation;
 	
 	equation = minValue*0.0001 + 0.000001;	
 	if ((deltaValue < equation) || (Util::equals(deltaValue, equation))){
@@ -38,9 +38,9 @@ bool Schwefel::isNearOptimum(double fBest){
 	return false;
 }
 
-double Schwefel::calc(double *x){
+real Schwefel::calc(real *x){
 	cont++;
-	long double value = 0;
+	real value = 0;
 	int i;
 
 	value = 418.9829*n;
@@ -51,8 +51,8 @@ double Schwefel::calc(double *x){
 }
 
 
-double Schwefel::calc2(ap::real_1d_array x){
-	double y = 0.0;	
+real Schwefel::calc2(ap::real_1d_array x){
+	real y = 0.0;	
 	return y;
 
 }

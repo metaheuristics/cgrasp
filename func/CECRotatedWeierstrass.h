@@ -9,24 +9,24 @@ class CECRotatedWeierstrass: public Funcao{
 		int n;
 		int cont;
 
-		double *o;
-		double **M;
+		real *o;
+		real **M;
 		
 		int kMax;
-		double a,b;
-		double sum2;		
+		real a,b;
+		real sum2;		
 		
-		long double *calcZ(double *x);
+		real *calcZ(real *x);
 
 	public:
 		CECRotatedWeierstrass(int n);
 		virtual ~CECRotatedWeierstrass();
 		virtual int getFnEvals();
 		void setFnEvals(int c);
-		virtual bool isNearOptimum(double fBest);				
-		virtual double calc(double *x);
-		virtual double getGap();
-		virtual double calc2(ap::real_1d_array x);
+		virtual bool isNearOptimum(real fBest);				
+		virtual real calc(real *x);
+		virtual real getGap();
+		virtual real calc2(ap::real_1d_array x);
 		virtual void calcGrad(ap::real_1d_array &x, ap::real_1d_array &g);
 };
 

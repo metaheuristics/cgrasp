@@ -6,9 +6,10 @@
 
 #include "Dts.h"
 #include "Util.h"
+#include "real.h"
 
 
-Dts::Dts(int n, double* l, double *u, Funcao *func, double hs, double he)
+Dts::Dts(int n, real* l, real *u, Funcao *func, real hs, real he)
 {
     this->n = n;
     this->l = l;
@@ -29,20 +30,20 @@ Dts::~Dts()
     delete tl;
 }
 
-double *Dts::goldenSearch(double *x, double *v, double *fXAux, double h, bool *imprL)
+real *Dts::goldenSearch(real *x, real *v, real *fXAux, real h, bool *imprL)
 {
     bool melhorou = false;
-    double valA, valB;
-    double valC, valD;
-    double ratio1, ratio2;
-    double *xAux = new double[n];
-    double *xA = new double[n];
-    double *xB = new double[n];
-    double *xC = new double[n];
-    double *xD = new double[n];
+    real valA, valB;
+    real valC, valD;
+    real ratio1, ratio2;
+    real *xAux = new real[n];
+    real *xA = new real[n];
+    real *xB = new real[n];
+    real *xC = new real[n];
+    real *xD = new real[n];
 
-    double *dir = new double[n];
-    double normaDir = Util::calcNorma(v, n);
+    real *dir = new real[n];
+    real normaDir = Util::calcNorma(v, n);
     for (int i = 0; i < n; i++) {
         dir[i] = v[i]/normaDir;
     }
@@ -200,10 +201,10 @@ double *Dts::goldenSearch(double *x, double *v, double *fXAux, double h, bool *i
 
 
 
-double *Dts::calcCentroide(double *x, double *dMax)
+real *Dts::calcCentroide(real *x, real *dMax)
 {
-    double *centroide, nCentroide;
-    double *xSTR, dist;
+    real *centroide, nCentroide;
+    real *xSTR, dist;
 
     if (debug ==  DEBUG_LEVEL4_) {
         printf("\tXNaSemi-TR ");
@@ -212,8 +213,8 @@ double *Dts::calcCentroide(double *x, double *dMax)
     }
 
     // Inicializa os parametros
-    *dMax = std::numeric_limits<double>::min();
-    centroide = new double[n];
+    *dMax = std::numeric_limits<real>::min();
+    centroide = new real[n];
     nCentroide = 0.0;
     for (int i = 0; i < n; i++) {
         centroide[i] = 0.0;
@@ -259,23 +260,23 @@ double *Dts::calcCentroide(double *x, double *dMax)
 }
 
 
-bool Dts::neighborhoodSearch(double *x, double *fXAux, double h, double *dir)
+bool Dts::neighborhoodSearch(real *x, real *fXAux, real h, real *dir)
 {
-    double **y = new double *[n];
-    double **U = new double *[n];
-    double *w = new double [n];
-    double *fY = new double [n];
-    double *deltafY  = new double [n];
-    double *stepSize = new double [n];
-    double totalfY = 0.0;
-    double normaY, sign, signAux;
-    double r, dMax;
-    double *centroide;
+    real **y = new real *[n];
+    real **U = new real *[n];
+    real *w = new real [n];
+    real *fY = new real [n];
+    real *deltafY  = new real [n];
+    real *stepSize = new real [n];
+    real totalfY = 0.0;
+    real normaY, sign, signAux;
+    real r, dMax;
+    real *centroide;
 
     bool imprL = false;
-    double fX;
-    double *xAux = new double[n];
-    double *xBestAux = new double[n];
+    real fX;
+    real *xAux = new real[n];
+    real *xBestAux = new real[n];
 
 
     // Se o ponto esta em alguma Semi-TR, aplique o procedimento semiTRSearch.
@@ -288,7 +289,7 @@ bool Dts::neighborhoodSearch(double *x, double *fXAux, double h, double *dir)
         centroide = calcCentroide(x, &dMax);
         for (int i = 0; i < n; i++) {
             sign = (x[i] - centroide[i] >= 0) ? 1.0: -1.0;
-            stepSize[i] = (double)h*sign;
+            stepSize[i] = (real)h*sign;
         }
 
         if (debug ==  DEBUG_LEVEL4_) {
@@ -297,7 +298,7 @@ bool Dts::neighborhoodSearch(double *x, double *fXAux, double h, double *dir)
             printf(" \n");
         }
 
-        /*double norma = Util::calcNorma(centroide, x, n);
+        /*real norma = Util::calcNorma(centroide, x, n);
           for (int i = 0; i < n; i++){
           dir[i] = (x[i] - centroide[i])/norma;
           if (debug ==  DEBUG_LEVEL4_){
@@ -311,16 +312,16 @@ bool Dts::neighborhoodSearch(double *x, double *fXAux, double h, double *dir)
         for (int i = 0; i < n; i++) {
             // Gera um numero de ponto flutuante entre 0 e 1
             r = Util::dRand();
-            signAux = (int)(r * (double)2);
+            signAux = (int)(r * (real)2);
             sign = (!signAux) ? 1.0 : -1.0;
-            stepSize[i] = (double)h*sign;
+            stepSize[i] = (real)h*sign;
         }
     }
 
     // Calcula os y[i] e os fY[i]
     for (int i = 0; i < n; i++) {
-        U[i] = new double[n];
-        y[i] = new double[n];
+        U[i] = new real[n];
+        y[i] = new real[n];
         Util::copy(y[i], x, n);
 
         y[i][i] += stepSize[i];
@@ -390,7 +391,7 @@ bool Dts::neighborhoodSearch(double *x, double *fXAux, double h, double *dir)
         }
     }
 
-    double norma = Util::calcNorma(dir,n);
+    real norma = Util::calcNorma(dir,n);
     for (int i = 0; i < n; i++) {
         dir[i] /= norma;
     }
@@ -404,8 +405,8 @@ bool Dts::neighborhoodSearch(double *x, double *fXAux, double h, double *dir)
 
 
     // Escolhe o melhor dos pontos Y
-    double fXAtual = *fXAux;
-    *fXAux = std::numeric_limits<double>::max();
+    real fXAtual = *fXAux;
+    *fXAux = std::numeric_limits<real>::max();
     for (int k = 0; k < n; k++) {
         if (fY[k] < *fXAux) {
             Util::copy(xBestAux, y[k], n);
@@ -472,16 +473,16 @@ bool Dts::neighborhoodSearch(double *x, double *fXAux, double h, double *dir)
 }
 
 /*
-  bool Dts::localSearch(double *x, double *fXAux, double h, double *dir){
+  bool Dts::localSearch(real *x, real *fXAux, real h, real *dir){
   bool imprL = false;
-  double fX;
-  double *xAux = new double[n];
-  double *xBestAux = new double[n];
+  real fX;
+  real *xAux = new real[n];
+  real *xBestAux = new real[n];
 
   Util::copy(xAux, x, n);
   Util::copy(xBestAux, x, n);
 
-  *fXAux = std::numeric_limits<double>::max();
+  *fXAux = std::numeric_limits<real>::max();
   //*fXAux = func->calc(x);
   //xBestAux = goldenSearch(x, dir, fXAux, h, &imprL);
 
@@ -509,16 +510,16 @@ bool Dts::neighborhoodSearch(double *x, double *fXAux, double h, double *dir)
   }*/
 
 
-void Dts::perturbe(double *x, double *xBestAux, double h)
+void Dts::perturbe(real *x, real *xBestAux, real h)
 {
     int auxI;
-    double gridI;
-    double numPointsPos, numPointsNeg;
-    double numPoints = 0.0;
-    double r, normaVector;
-    double *xGrid = new double[n];
-    double *bhSelected = new double[n];
-    double aux = 0.0, distancia = 0.0;
+    real gridI;
+    real numPointsPos, numPointsNeg;
+    real numPoints = 0.0;
+    real r, normaVector;
+    real *xGrid = new real[n];
+    real *bhSelected = new real[n];
+    real aux = 0.0, distancia = 0.0;
 
     // Escolhe aleatoriamente um ponto do Grid de tamanho de passo h.
     for (int i = 0; i < n; i++) {
@@ -531,12 +532,12 @@ void Dts::perturbe(double *x, double *xBestAux, double h)
         // Escolhe aleatoriamente um dos indices do Grid na direcao i.
         //r = dRand();
         r = Util::dRand();
-        auxI = (int)(r * (double)numPoints);
+        auxI = (int)(r * (real)numPoints);
 
-        gridI = ((double)auxI - numPointsNeg);
+        gridI = ((real)auxI - numPointsNeg);
 
         // Calcula a posicao da direcao no eixo i.
-        xGrid[i] = xBestAux[i] + ((double)gridI*h);
+        xGrid[i] = xBestAux[i] + ((real)gridI*h);
     }
 
     // Calcula a projecao do vetor de x a xGrid.
@@ -560,13 +561,13 @@ void Dts::perturbe(double *x, double *xBestAux, double h)
 }
 
 // Etapa de exploração do DTS
-bool Dts::explorationSearch(double *x, double *fXAux, double h)
+bool Dts::explorationSearch(real *x, real *fXAux, real h)
 {
     bool imprL = false;
     bool imprN = false;
-    double *dir = new double[n];;
-    double fXBest, *xBest = new double[n];
-    double min;
+    real *dir = new real[n];;
+    real fXBest, *xBest = new real[n];
+    real min;
     int NumIterNoImprov = 0, MaxItersNoImprov = 2*n;
     //int NumIterNoImprov = 0, MaxItersNoImprov = n*n;
 

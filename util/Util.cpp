@@ -17,20 +17,20 @@ Util::~Util()
 //  this->mtRand = mtRand;
 //}
 
-double Util::dRand()
+real Util::dRand()
 {
-    return ((double)rand() / ((double)(RAND_MAX)) );
+    return ((real)rand() / ((real)(RAND_MAX)) );
     //return mtRand->rand();
 }
 
-void Util::copy(double *xAux, double *x, int n){
+void Util::copy(real *xAux, real *x, int n){
     for (int i = 0; i < n; i++) {
         xAux[i] = x[i];
     }
 }
 
 // Se x está no intervalo entre 'l' e 'u' retorne true, senao retorne false.
-bool Util::feasible(double *x, double *l, double *u, int n)
+bool Util::feasible(real *x, real *l, real *u, int n)
 {
     for (int i = 0; i < n; i++) {
         if ((x[i] < l[i]) || (x[i] > u[i])) {
@@ -41,7 +41,7 @@ bool Util::feasible(double *x, double *l, double *u, int n)
     return true;
 }
 
-bool Util::equals(double x1, double x2)
+bool Util::equals(real x1, real x2)
 {
     if (fabs(x1 - x2) > 0.000001) {   // FIX: tolerancia fixa
         return false;
@@ -50,7 +50,7 @@ bool Util::equals(double x1, double x2)
     return true;
 }
 
-void Util::printX(double *x, int n)
+void Util::printX(real *x, int n)
 {
     printf("(");
     for (int i = 0; i < n; i++) {
@@ -62,9 +62,9 @@ void Util::printX(double *x, int n)
     printf(")");
 }
 
-double Util::calcNorma(double *x, double *xGrid, int n)
+real Util::calcNorma(real *x, real *xGrid, int n)
 {
-    double aux = 0.0, norma;
+    real aux = 0.0, norma;
 
     for (int i = 0; i < n; i++) {
         aux += pow((xGrid[i]-x[i]), 2);
@@ -75,9 +75,9 @@ double Util::calcNorma(double *x, double *xGrid, int n)
 }
 
 
-double Util::calcNorma(double *x, int n)
+real Util::calcNorma(real *x, int n)
 {
-    double aux = 0.0, norma;
+    real aux = 0.0, norma;
 
     for (int i = 0; i < n; i++) {
         aux += pow(x[i], 2);
@@ -87,9 +87,9 @@ double Util::calcNorma(double *x, int n)
     return norma;
 }
 
-double Util::dist(double *x1, double *x2, int n)
+real Util::dist(real *x1, real *x2, int n)
 {
-    double aux = 0.0;
+    real aux = 0.0;
 
     for (int i = 0; i < n; i++) {
         aux += pow(x2[i]-x1[i], 2);
@@ -98,40 +98,40 @@ double Util::dist(double *x1, double *x2, int n)
     return sqrt(aux);
 }
 
-double Util::maxreal(double x1, double x2)
+real Util::maxreal(real x1, real x2)
 {
     return ((x1 > x2) ? x1: x2);
 }
 
-double Util::minreal(double x1, double x2)
+real Util::minreal(real x1, real x2)
 {
     return ((x1 < x2) ? x1: x2);
 }
 
-double Util::dotproduct(double *x1, double *x2, int n)
+real Util::dotproduct(real *x1, real *x2, int n)
 {
-    double aux = 0.0;
+    real aux = 0.0;
     for (int i = 0; i < n; i++) {
         aux += x1[i]*x2[i];
     }
     return aux;
 }
 
-void Util::addvector(double *x1, double *x2, int n)
+void Util::addvector(real *x1, real *x2, int n)
 {
     for (int i = 0; i < n; i++){
         x1[i] += x2[i];
     }
 }
 
-void Util::subvector(double *x1, double *x2, int n)
+void Util::subvector(real *x1, real *x2, int n)
 {
     for (int i = 0; i < n; i++) {
         x1[i] -= x2[i];
     }
 }
 
-double Util::sqr(double x)
+real Util::sqr(real x)
 {
     return x*x;
 }

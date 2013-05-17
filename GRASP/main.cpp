@@ -12,6 +12,7 @@
 #include "Util.h"
 #include "Dts.h"
 #include "lbfgs.h"
+#include "real.h"
 
 #include "Rosenbrock2.h"
 #include "Zakharov.h"
@@ -65,10 +66,10 @@ int64_t getMilisegundos()
 MGrasp *initMGrasp(int iFuncNum, int n, Funcao **func)
 {
     int m;
-    double *u, *l;
-    double hs, he, plo;
-    l = new double[n];
-    u = new double[n];
+    real *u, *l;
+    real hs, he, plo;
+    l = new real[n];
+    u = new real[n];
     MGrasp *mgrasp;
 
     plo = 0.7;
@@ -157,8 +158,8 @@ MGrasp *initMGrasp(int iFuncNum, int n, Funcao **func)
         delete []l;
         delete []u;
 
-        l = new double[n];
-        u = new double[n];
+        l = new real[n];
+        u = new real[n];
 
         hs = 1.0;
         he = 0.5;
@@ -287,8 +288,8 @@ MGrasp *initMGrasp(int iFuncNum, int n, Funcao **func)
         hs = 0.1;
         he = 0.0125;
         for (int i =0; i < n; i++) {
-            l[i] = (double) -n;
-            u[i] = (double) n;
+            l[i] = (real) -n;
+            u[i] = (real) n;
         }
         *func = new Perm(n);
         break;
@@ -299,8 +300,8 @@ MGrasp *initMGrasp(int iFuncNum, int n, Funcao **func)
         //hs = 0.1;
         //he = 0.0125;
         for (int i =0; i < n; i++) {
-            l[i] = (double) -n;
-            u[i] = (double) n;
+            l[i] = (real) -n;
+            u[i] = (real) n;
         }
         *func = new Perm_0(n);
         break;
@@ -309,8 +310,8 @@ MGrasp *initMGrasp(int iFuncNum, int n, Funcao **func)
         hs = 1.0;
         he = 0.1;
         for (int i =0; i < n; i++) {
-            l[i] = (double) 0.0;
-            u[i] = (double) n;
+            l[i] = (real) 0.0;
+            u[i] = (real) n;
         }
         *func = new PowerSum(n);
         break;
@@ -350,8 +351,8 @@ MGrasp *initMGrasp(int iFuncNum, int n, Funcao **func)
         }
 
         for (int i =0; i < n; i++) {
-            l[i] = (double) -n*n;
-            u[i] = (double) n*n;
+            l[i] = (real) -n*n;
+            u[i] = (real) n*n;
         }
 
         *func = new Trid(n);
@@ -544,7 +545,7 @@ inline void closeIfNotNull(FILE *f)
         fclose(f);
 }
 
-void saveGaps(double *mediaGaps, int numIter)
+void saveGaps(real *mediaGaps, int numIter)
 {
     FILE *arqlog100 = fopen("gap100.txt", "a+");
     FILE *arqlog500 = fopen("gap500.txt", "a+");
@@ -554,33 +555,33 @@ void saveGaps(double *mediaGaps, int numIter)
     FILE *arqlog20000 = fopen("gap20000.txt", "a+");
     FILE *arqlog50000 = fopen("gap50000.txt", "a+");
 
-    printf("Media do GAP 100 = %lf \n", mediaGaps[0]/(double)numIter);
+    printf("Media do GAP 100 = %lf \n", mediaGaps[0]/(real)numIter);
     if (arqlog100 != NULL)
-        fprintf(arqlog100, "%lf\n", mediaGaps[0]/(double)numIter);
+        fprintf(arqlog100, "%lf\n", mediaGaps[0]/(real)numIter);
 
-    printf("Media do GAP 500 = %lf \n", mediaGaps[1]/(double)numIter);
+    printf("Media do GAP 500 = %lf \n", mediaGaps[1]/(real)numIter);
     if (arqlog500 != NULL)
-        fprintf(arqlog500, "%lf\n", mediaGaps[1]/(double)numIter);
+        fprintf(arqlog500, "%lf\n", mediaGaps[1]/(real)numIter);
 
-    printf("Media do GAP 1000 = %lf \n", mediaGaps[2]/(double)numIter);
+    printf("Media do GAP 1000 = %lf \n", mediaGaps[2]/(real)numIter);
     if (arqlog1000 != NULL)
-        fprintf(arqlog1000, "%lf\n", mediaGaps[2]/(double)numIter);
+        fprintf(arqlog1000, "%lf\n", mediaGaps[2]/(real)numIter);
 
-    printf("Media do GAP 5000 = %lf \n", mediaGaps[3]/(double)numIter);
+    printf("Media do GAP 5000 = %lf \n", mediaGaps[3]/(real)numIter);
     if (arqlog5000 != NULL)
-        fprintf(arqlog5000, "%lf\n", mediaGaps[3]/(double)numIter);
+        fprintf(arqlog5000, "%lf\n", mediaGaps[3]/(real)numIter);
 
-    printf("Media do GAP 10000 = %lf \n", mediaGaps[4]/(double)numIter);
+    printf("Media do GAP 10000 = %lf \n", mediaGaps[4]/(real)numIter);
     if (arqlog10000 != NULL)
-        fprintf(arqlog10000, "%lf\n", mediaGaps[4]/(double)numIter);
+        fprintf(arqlog10000, "%lf\n", mediaGaps[4]/(real)numIter);
 
-    printf("Media do GAP 20000 = %lf \n", mediaGaps[5]/(double)numIter);
+    printf("Media do GAP 20000 = %lf \n", mediaGaps[5]/(real)numIter);
     if (arqlog20000 != NULL)
-        fprintf(arqlog20000, "%lf\n", mediaGaps[5]/(double)numIter);
+        fprintf(arqlog20000, "%lf\n", mediaGaps[5]/(real)numIter);
 
-    printf("Media do GAP 50000 = %lf \n", mediaGaps[6]/(double)numIter);
+    printf("Media do GAP 50000 = %lf \n", mediaGaps[6]/(real)numIter);
     if (arqlog50000 != NULL)
-        fprintf(arqlog50000, "%lf\n", mediaGaps[6]/(double)numIter);
+        fprintf(arqlog50000, "%lf\n", mediaGaps[6]/(real)numIter);
 
     closeIfNotNull(arqlog100);
     closeIfNotNull(arqlog500);
@@ -601,9 +602,9 @@ int main(int argc, char **argv)
     int iFuncNumb, n, numIter;
     int contSucess = 0;
     int type;
-    double *x;
-    double epsg, epsf, epsx;
-    double maxiters = 0;
+    real *x;
+    real epsg, epsf, epsx;
+    real maxiters = 0;
     long fnEvals, mediaFnEvals = 0;
     long gradEvals, mediaGradEvals = 0;
     bool sucess;
@@ -614,8 +615,8 @@ int main(int argc, char **argv)
     LBFGS *lbfgs;
     Funcao *func;
 
-    double *gaps;
-    double mediaGaps[7];
+    real *gaps;
+    real mediaGaps[7];
 
     if (argc < 7) {
         usage();
@@ -673,7 +674,7 @@ int main(int argc, char **argv)
         }
         else {
             printf("BFGS... \n");
-            x = new double[n];
+            x = new real[n];
             mgrasp->unifRandom(x);
             xBFGS.setbounds(1, n);
             for (int j = 0; j < n; j++) {
@@ -718,9 +719,9 @@ int main(int argc, char **argv)
     }
     else {
         printf("Num execucoes com sucesso... = %d \n", contSucess);
-        printf("Media de avaliacao da funcao... = %d \n", (long)((double)mediaFnEvals/contSucess));
-        printf("Media de avaliacao do gradiente... = %d \n", (long)((double)mediaGradEvals/contSucess));
-        printf("Media de tempo... = %d \n", (long)((double)mediaTime/contSucess));
+        printf("Media de avaliacao da funcao... = %d \n", (long)((real)mediaFnEvals/contSucess));
+        printf("Media de avaliacao do gradiente... = %d \n", (long)((real)mediaGradEvals/contSucess));
+        printf("Media de tempo... = %d \n", (long)((real)mediaTime/contSucess));
     }
 
     return 0;

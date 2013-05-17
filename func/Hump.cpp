@@ -23,13 +23,13 @@ int Hump::getFnEvals(){
 	return cont;	
 }
 
-double Hump::getGap(){
+real Hump::getGap(){
 	return (bestValue - minValue);
 }
 
-bool Hump::isNearOptimum(double fBest){
-	double deltaValue =	fabs(fBest - minValue);
-	double equation;
+bool Hump::isNearOptimum(real fBest){
+	real deltaValue =	fabs(fBest - minValue);
+	real equation;
 	
 	equation = minValue*0.0001 + 0.000001;	
 	if ((deltaValue < equation) || (Util::equals(deltaValue, equation))){
@@ -39,9 +39,9 @@ bool Hump::isNearOptimum(double fBest){
 	return false;
 }
 
-double Hump::calc(double *x){
+real Hump::calc(real *x){
 	cont++;  
-	long double value;
+	real value;
 
 	//y=1.0316285+4*x(1)^2-2.1*x(1)^4+x(1)^6/3+x(1)*x(2)-4*x(2)^2+4*x(2)^4;
 
@@ -52,8 +52,8 @@ double Hump::calc(double *x){
 }
 
 
-double Hump::calc2(ap::real_1d_array x){
-	double y = 0.0;	
+real Hump::calc2(ap::real_1d_array x){
+	real y = 0.0;	
 	return y;
 
 }

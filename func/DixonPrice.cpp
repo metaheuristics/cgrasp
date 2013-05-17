@@ -22,13 +22,13 @@ int DixonPrice::getFnEvals(){
 	return cont;	
 }
 
-double DixonPrice::getGap(){
+real DixonPrice::getGap(){
 	return (bestValue - minValue);
 }
 
-bool DixonPrice::isNearOptimum(double fBest){
-	double deltaValue =	fabs(fBest - minValue);
-	double equation;
+bool DixonPrice::isNearOptimum(real fBest){
+	real deltaValue =	fabs(fBest - minValue);
+	real equation;
 	
 	equation = minValue*0.0001 + 0.000001;	
 	if ((deltaValue < equation) || (Util::equals(deltaValue, equation))){
@@ -38,9 +38,9 @@ bool DixonPrice::isNearOptimum(double fBest){
 	return false;
 }
 
-double DixonPrice::calc(double *x){
+real DixonPrice::calc(real *x){
 	cont++;  
-	long double value=0;
+	real value=0;
 	int i;
 
 	value = pow(1 - x[0],2) + pow(1 - x[n-1],2);
@@ -52,8 +52,8 @@ double DixonPrice::calc(double *x){
 }
 
 
-double DixonPrice::calc2(ap::real_1d_array x){
-	double y = 0.0;	
+real DixonPrice::calc2(ap::real_1d_array x){
+	real y = 0.0;	
 	return y;
 
 }

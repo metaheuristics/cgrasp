@@ -28,13 +28,13 @@ int Hartmann::getFnEvals(){
 	return cont;	
 }
 
-double Hartmann::getGap(){
+real Hartmann::getGap(){
 	return (bestValue - minValue);
 }
 
-bool Hartmann::isNearOptimum(double fBest){
-	double deltaValue =	fabs(fBest - minValue);
-	double equation;
+bool Hartmann::isNearOptimum(real fBest){
+	real deltaValue =	fabs(fBest - minValue);
+	real equation;
 	
 	equation = fabs(minValue)*0.0001 + 0.000001;
 	//printf("|fX-fX*| = %lf - e1*|fX*|+e2 = %lf \n", deltaValue, equation);
@@ -46,9 +46,9 @@ bool Hartmann::isNearOptimum(double fBest){
 	return false;
 }
 
- double Hartmann::calc(double *x){
+ real Hartmann::calc(real *x){
 	cont++;
-	long double value;
+	real value;
   	
 	switch (n){
 		case 3: value = func43(x);
@@ -62,15 +62,15 @@ bool Hartmann::isNearOptimum(double fBest){
 
 
  // Hartmann function (3,4)
- double Hartmann::func43(double *x){
- 	 long double value = 0;
+ real Hartmann::func43(real *x){
+ 	 real value = 0;
  	 int i, j;
- 	 long double qi;
+ 	 real qi;
 
- 	 long double A[4][3] = {{3.0,10.0,30.0},{0.1,10.0,35.0},{3.0,10.0,30.0},{0.1,10.0,35.0}};
- 	 long double P[4][3] = {{0.6890,0.1170,0.2673},{0.4699,0.4387,0.7470},
+ 	 real A[4][3] = {{3.0,10.0,30.0},{0.1,10.0,35.0},{3.0,10.0,30.0},{0.1,10.0,35.0}};
+ 	 real P[4][3] = {{0.6890,0.1170,0.2673},{0.4699,0.4387,0.7470},
 				 {0.1091,0.8732,0.5547},{0.0381,0.5743,0.8828}};
- 	 long double alpha[4] = {1.0,1.2,3.0,3.2};
+ 	 real alpha[4] = {1.0,1.2,3.0,3.2};
 
  	 for (i=0;i<4;i++){
  	     qi = 0;
@@ -85,23 +85,23 @@ bool Hartmann::isNearOptimum(double fBest){
 
 
  // Hartmann function (6,4)
- double Hartmann::func46(double *x){
-	 double value = 0;
+ real Hartmann::func46(real *x){
+	 real value = 0;
 	 int i, j;
-	 long double qi;
+	 real qi;
 
-	 //double B[4][6] = {{10,3,17,3.5,1.7,8},
-	double B[4][6] = { {10.0, 3.0, 17.0, 3.05, 1.7, 8.0},
+	 //real B[4][6] = {{10,3,17,3.5,1.7,8},
+	real B[4][6] = { {10.0, 3.0, 17.0, 3.05, 1.7, 8.0},
 				 {0.05, 10.0, 17.0, 0.1, 8.0, 14.0},
 				 {3.0, 3.5, 1.7, 10.0, 17.0, 8.0},
 				 {17.0, 8.0, 0.05, 10.0, 0.1, 14.0}};
 
-	double Q[4][6] = {{0.1312, 0.1696, 0.5569, 0.0124, 0.8283, 0.5886},
+	real Q[4][6] = {{0.1312, 0.1696, 0.5569, 0.0124, 0.8283, 0.5886},
 				 {0.2329, 0.4135, 0.8307, 0.3736, 0.1004, 0.9991},
 				 {0.2348, 0.1451, 0.3522, 0.2883, 0.3047, 0.6650},
 				 {0.4047, 0.8828, 0.8732, 0.5743, 0.1091, 0.0381}};
 
-	double alpha[4] = {1.0, 1.2, 3.0, 3.2};
+	real alpha[4] = {1.0, 1.2, 3.0, 3.2};
 	
 	  	for (i=0;i<4;i++){
 	      	qi = 0.0;
@@ -118,25 +118,25 @@ bool Hartmann::isNearOptimum(double fBest){
  	}
 
 
- double Hartmann::calc2(ap::real_1d_array x){
- 	 long double value = 0;
+ real Hartmann::calc2(ap::real_1d_array x){
+ 	 real value = 0;
  	 int i, j;
- 	 long double qi;
+ 	 real qi;
 
 	 cont++;
- 	 long double A[4][3] = {{3.0,10.0,30.0},{0.1,10.0,35.0},{3.0,10.0,30.0},{0.1,10.0,35.0}};
- 	 long double P[4][3] = {{0.6890,0.1170,0.2673},{0.4699,0.4387,0.7470},
+ 	 real A[4][3] = {{3.0,10.0,30.0},{0.1,10.0,35.0},{3.0,10.0,30.0},{0.1,10.0,35.0}};
+ 	 real P[4][3] = {{0.6890,0.1170,0.2673},{0.4699,0.4387,0.7470},
 				 {0.1091,0.8732,0.5547},{0.0381,0.5743,0.8828}};
 
-  	long double B[4][6] = {{10.0,3.0,17.0,3.5,1.7,8.0},
+  	real B[4][6] = {{10.0,3.0,17.0,3.5,1.7,8.0},
 				 {0.05,10.0,17.0,0.1,8.0,14.0},
 				 {3.0,3.5,1.7,10.0,17.0,8.0},
 				 {17.0,8.0,0.05,10.0,0.1,14.0}};
-  	long double Q[4][6] = {{0.1312,0.1696,0.5569,0.0124,0.8283,0.5886},
+  	real Q[4][6] = {{0.1312,0.1696,0.5569,0.0124,0.8283,0.5886},
 				 {0.2329,0.4135,0.8307,0.3736,0.1004,0.9991},
 				 {0.2348,0.1451,0.3522,0.2883,0.3047,0.6650},
 				 {0.4047,0.8828,0.8732,0.5743,0.1091,0.0381}};
- 	 long double alpha[4] = {1.0,1.2,3.0,3.2};
+ 	 real alpha[4] = {1.0,1.2,3.0,3.2};
 
 	 if (n == 3){
  		
@@ -163,24 +163,24 @@ bool Hartmann::isNearOptimum(double fBest){
  }
  
  void Hartmann::calcGrad(ap::real_1d_array &x, ap::real_1d_array &g){
-	 long double value = 0;
+	 real value = 0;
  	 int i, j, k;
- 	 long double qi, qiAux;
+ 	 real qi, qiAux;
 
- 	 long double A[4][3] = {{3.0,10.0,30.0},{0.1,10.0,35.0},{3.0,10.0,30.0},{0.1,10.0,35.0}};
- 	 long double P[4][3] = {{0.6890,0.1170,0.2673},{0.4699,0.4387,0.7470},
+ 	 real A[4][3] = {{3.0,10.0,30.0},{0.1,10.0,35.0},{3.0,10.0,30.0},{0.1,10.0,35.0}};
+ 	 real P[4][3] = {{0.6890,0.1170,0.2673},{0.4699,0.4387,0.7470},
 				 {0.1091,0.8732,0.5547},{0.0381,0.5743,0.8828}};
-  	long double B[4][6] = {{10.0,3.0,17.0,3.5,1.7,8.0},
+  	real B[4][6] = {{10.0,3.0,17.0,3.5,1.7,8.0},
 				 {0.05,10.0,17.0,0.1,8.0,14.0},
 				 {3.0,3.5,1.7,10.0,17.0,8.0},
 				 {17.0,8.0,0.05,10.0,0.1,14.0}};
-  	long double Q[4][6] = {{0.1312,0.1696,0.5569,0.0124,0.8283,0.5886},
+  	real Q[4][6] = {{0.1312,0.1696,0.5569,0.0124,0.8283,0.5886},
 				 {0.2329,0.4135,0.8307,0.3736,0.1004,0.9991},
 				 {0.2348,0.1451,0.3522,0.2883,0.3047,0.6650},
 				 {0.4047,0.8828,0.8732,0.5743,0.1091,0.0381}};
 
 
- 	 long double alpha[4] = {1.0,1.2,3.0,3.2};
+ 	 real alpha[4] = {1.0,1.2,3.0,3.2};
 	
 	contGrad++;
 	

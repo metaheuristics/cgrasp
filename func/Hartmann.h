@@ -8,19 +8,19 @@ class Hartmann: public Funcao{
 		int m, n;
 		int cont;
 		
-		double func43(double *x);
-		double func46(double *x);
+		real func43(real *x);
+		real func46(real *x);
 		
 	public:
 		Hartmann(int n, int m);
 		virtual ~Hartmann();
 		virtual int getFnEvals();
 		void setFnEvals(int c);
-		virtual bool isNearOptimum(double fBest);				
-		virtual double calc(double *x);
-		virtual double calc2(ap::real_1d_array x);
+		virtual bool isNearOptimum(real fBest);				
+		virtual real calc(real *x);
+		virtual real calc2(ap::real_1d_array x);
 		virtual void calcGrad(ap::real_1d_array &x, ap::real_1d_array &g);
-		virtual double getGap();
+		virtual real getGap();
 
 };
 
